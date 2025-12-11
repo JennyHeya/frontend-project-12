@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
-    "start": "serve -s frontend/dist",
-    "dev": "cd frontend && npm run dev",
+    "start": "start-server -s ./frontend/dist",
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"start-server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
