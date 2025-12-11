@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-      "build": "vite build",
-  "preview": "vite preview",
+    "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-     "start": "serve -s frontend/dist",
+    "start": "serve -s ./dist",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
@@ -25,6 +25,6 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-    "vite": "^7.2.4",
+    "vite": "^7.2.4"
   }
 }
