@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"start-server\"",
+    "build": "cd frontend && npm install && npm run build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "start": "start-server -s ./frontend/dist"
+    "start": "start-server -s ./frontend/dist",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
     "react": "^19.2.0",
