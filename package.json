@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/JennyHeya/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/JennyHeya/frontend-project-12/actions)",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "keywords": [],
   "author": "JennyHeya",
@@ -13,6 +17,12 @@
     "@hexlet/chat-server": "^2.0.4"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "@stylistic/eslint-plugin-js": "^4.4.1",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "prettier": "^3.7.4"
   }
 }

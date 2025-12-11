@@ -6,3 +6,12 @@ start:
 
 dev:
 	concurrently "npm run dev --prefix frontend" "npx start-server"
+
+lint:
+	npx eslint .
+
+lint:fix:
+	npx eslint . --fix
+
+format:
+	npx prettier --write "**/*.{js,jsx,json,md}"
