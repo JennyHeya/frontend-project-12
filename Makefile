@@ -2,14 +2,14 @@ build:
 	cd frontend && npm install && npm run build
 
 start:
-	cd frontend && npm run start
+	npx @hexlet/chat-server
 
 install:
 	npm install
 	cd frontend && npm install
 
 dev:
-	concurrently "npm run dev --prefix frontend" "npx start-server"
+	concurrently "npm run dev --prefix frontend" "npx @hexlet/chat-server"
 
 lint:
 	npx eslint .
