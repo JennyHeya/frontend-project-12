@@ -75,7 +75,7 @@ const LoginPage = () => {
                   </Formik>
                   <div className="text-center">
                     <span>Нет аккаунта? </span>
-                    <a href="/signup">Регистрация</a>
+                    <Link to="/signup">Регистрация</Link>
                   </div>
                 </div>
               </div>
