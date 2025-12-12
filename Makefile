@@ -2,7 +2,7 @@ build:
 	cd frontend && npm install && npm run build
 
 start:
-	cd frontend && npx --yes serve -s ./dist -l 5000
+	cd frontend && npm run start
 
 install:
 	npm install
