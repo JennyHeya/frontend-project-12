@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
-    "start": "node ./node_modules/@hexlet/chat-server/bin/server.js -s ./frontend/dist",
+    "start": "start-server -s ./frontend/dist",
     "dev": "concurrently \"npm run dev --prefix frontend\" \"start-server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
