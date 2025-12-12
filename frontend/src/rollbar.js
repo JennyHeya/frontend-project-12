@@ -1,8 +1,8 @@
-import Rollbar from 'rollbar'
+﻿import Rollbar from 'rollbar'
 
-const token = import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN || '';
+const token = import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN || ''
 
-let _rollbar = null;
+let _rollbar = null
 if (token && token !== 'POST_CLIENT_ITEM_ACCESS_TOKEN') {
   const rollbarConfig = {
     accessToken: token,
@@ -11,20 +11,20 @@ if (token && token !== 'POST_CLIENT_ITEM_ACCESS_TOKEN') {
     captureUnhandledRejections: true,
     payload: {
       person: {
-        id: 'guest', // будет заменяться на username после логина
+        id: 'guest', // Р±СѓРґРµС‚ Р·Р°РјРµРЅСЏС‚СЊСЃСЏ РЅР° username РїРѕСЃР»Рµ Р»РѕРіРёРЅР°
       },
     },
-  };
+  }
 
-  _rollbar = new Rollbar(rollbarConfig);
+  _rollbar = new Rollbar(rollbarConfig)
 } else {
-  const noop = () => {};
+  const noop = () => {}
   _rollbar = {
     error: noop,
     info: noop,
     warn: noop,
     configure: noop,
-  };
+  }
 }
 
-export const rollbar = _rollbar;
+export const rollbar = _rollbar

@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import logo from '../../assets/react.svg';
-import { Formik, Form, Field } from 'formik';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../contexts/AuthContext.jsx';
+﻿import { useState } from 'react'
+import logo from '../../assets/react.svg'
+import { Formik, Form, Field } from 'formik'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { useTranslation } from 'react-i18next'
+import { useAuth } from '../../contexts/AuthContext.jsx'
 
 const LoginPage = () => {
-  const [authFailed, setAuthFailed] = useState(false);
-  const navigate = useNavigate();
-  const { logIn } = useAuth();
-  const { t } = useTranslation();
+  const [authFailed, setAuthFailed] = useState(false)
+  const navigate = useNavigate()
+  const { logIn } = useAuth()
+  const { t } = useTranslation()
 
   return (
     <div className="h-100 bg-light">
@@ -32,15 +32,15 @@ const LoginPage = () => {
                   <Formik
                     initialValues={{ username: '', password: '' }}
                     onSubmit={async (values, { setSubmitting }) => {
-                      setAuthFailed(false);
+                      setAuthFailed(false)
                       try {
-                        const response = await axios.post('/api/v1/login', values);
-                        logIn(response.data);
-                        navigate('/');
+                        const response = await axios.post('/api/v1/login', values)
+                        logIn(response.data)
+                        navigate('/')
                       } catch (err) {
-                        setSubmitting(false);
+                        setSubmitting(false)
                         if (err.response?.status === 401) {
-                          setAuthFailed(true);
+                          setAuthFailed(true)
                         }
                       }
                     }}
@@ -97,7 +97,8 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default LoginPage
+

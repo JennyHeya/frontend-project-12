@@ -1,4 +1,4 @@
-import i18n from 'i18next'
+﻿import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import resources from './locales/index.js'
 
@@ -6,7 +6,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'ru', // ← ВАЖНО: только ru, без детектора!
+    lng: 'ru', // в†ђ Р’РђР–РќРћ: С‚РѕР»СЊРєРѕ ru, Р±РµР· РґРµС‚РµРєС‚РѕСЂР°!
     fallbackLng: 'ru',
     interpolation: {
       escapeValue: false,
@@ -14,3 +14,4 @@ i18n
   })
 
 export default i18n
+

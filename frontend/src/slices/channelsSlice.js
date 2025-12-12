@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+﻿import { createSlice } from '@reduxjs/toolkit'
 
 const channelsSlice = createSlice({
   name: 'channels',
@@ -19,7 +19,7 @@ const channelsSlice = createSlice({
     },
      removeChannel: (state, action) => {
       const channelId = action.payload
-      // Удаляем канал из массива
+      // РЈРґР°Р»СЏРµРј РєР°РЅР°Р» РёР· РјР°СЃСЃРёРІР°
       state.channels = state.channels.filter(channel => channel.id !== channelId)
       
       if (state.currentChannelId === channelId) {
@@ -45,3 +45,4 @@ export const {
 } = channelsSlice.actions
 
 export default channelsSlice.reducer
+

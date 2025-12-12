@@ -1,28 +1,28 @@
-import { Modal, Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { getSocket } from '../../services/socket.js';
-import { removeChannel, setCurrentChannel } from '../../slices/channelsSlice.js';
+﻿import { Modal, Button } from 'react-bootstrap'
+import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { getSocket } from '../../services/socket.js'
+import { removeChannel, setCurrentChannel } from '../../slices/channelsSlice.js'
 
 const RemoveChannelModal = ({ show, onHide, channel }) => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
 
   const handleRemove = () => {
-    const socket = getSocket();
+    const socket = getSocket()
 
     socket.emit('removeChannel', { id: channel.id }, (response) => {
       if (response.status === 'ok') {
-        dispatch(removeChannel(channel.id));
-        dispatch(setCurrentChannel(1)); // general
-        toast.success(t('toasts.channelRemoved'));
-        onHide();
+        dispatch(removeChannel(channel.id))
+        dispatch(setCurrentChannel(1)) // general
+        toast.success(t('toasts.channelRemoved'))
+        onHide()
       } else {
-        toast.error(t('toasts.networkError'));
+        toast.error(t('toasts.networkError'))
       }
-    });
-  };
+    })
+  }
 
   return (
     <Modal show={show} onHide={onHide} centered>
@@ -41,7 +41,8 @@ const RemoveChannelModal = ({ show, onHide, channel }) => {
         </div>
       </Modal.Body>
     </Modal>
-  );
-};
+  )
+}
 
 export default RemoveChannelModal
+

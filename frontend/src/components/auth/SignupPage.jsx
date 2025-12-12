@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import logo from '../../assets/react.svg';
-import { Formik, Form, Field } from 'formik';
-import * as yup from 'yup';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../contexts/AuthContext.jsx';
+﻿import { useState } from 'react'
+import logo from '../../assets/react.svg'
+import { Formik, Form, Field } from 'formik'
+import * as yup from 'yup'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useAuth } from '../../contexts/AuthContext.jsx'
 
 const SignupPage = () => {
-  const [signupFailed, setSignupFailed] = useState(false);
-  const navigate = useNavigate();
-  const { logIn } = useAuth();
-  const { t } = useTranslation();
+  const [signupFailed, setSignupFailed] = useState(false)
+  const navigate = useNavigate()
+  const { logIn } = useAuth()
+  const { t } = useTranslation()
 
   const schema = yup.object({
     username: yup
@@ -28,7 +28,7 @@ const SignupPage = () => {
       .string()
       .oneOf([yup.ref('password')], t('signup.errors.passwordMatch'))
       .required(t('signup.errors.required')),
-  });
+  })
 
   return (
     <div className="h-100 bg-light">
@@ -51,20 +51,20 @@ const SignupPage = () => {
                     initialValues={{ username: '', password: '', confirmPassword: '' }}
                     validationSchema={schema}
                     onSubmit={async (values, { setSubmitting }) => {
-                      setSignupFailed(false);
+                      setSignupFailed(false)
                       try {
                         const response = await axios.post('/api/v1/signup', {
                           username: values.username,
                           password: values.password,
-                        });
-                        logIn(response.data);
-                        navigate('/');
+                        })
+                        logIn(response.data)
+                        navigate('/')
                       } catch (err) {
-                        setSubmitting(false);
+                        setSubmitting(false)
                         if (err.response?.status === 409) {
-                          setSignupFailed(true);
+                          setSignupFailed(true)
                         } else {
-                          console.error(err);
+                          console.error(err)
                         }
                       }
                     }}
@@ -135,7 +135,8 @@ const SignupPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignupPage;
+export default SignupPage
+

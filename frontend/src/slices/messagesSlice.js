@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+﻿import { createSlice } from '@reduxjs/toolkit'
 
 const messagesSlice = createSlice({
   name: 'messages',
@@ -21,3 +21,4 @@ const messagesSlice = createSlice({
 
 export const { setMessages, addMessage, setSendingStatus } = messagesSlice.actions
 export default messagesSlice.reducer
+

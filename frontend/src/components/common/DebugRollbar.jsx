@@ -1,20 +1,20 @@
-import React from 'react';
-import { rollbar } from '../../rollbar.js';
+﻿import React from 'react'
+import { rollbar } from '../../rollbar.js'
 
 const DebugRollbar = () => {
-  const token = import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN || '';
-  if (!token) return null;
+  const token = import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN || ''
+  if (!token) return null
 
   const handleSend = () => {
     try {
-      rollbar.error('Test error from DebugRollbar');
+      rollbar.error('Test error from DebugRollbar')
       // eslint-disable-next-line no-console
-      console.info('Rollbar test sent (if token valid)');
+      console.info('Rollbar test sent (if token valid)')
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.error('Rollbar test failed', e);
+      console.error('Rollbar test failed', e)
     }
-  };
+  }
 
   return (
     <div className="m-2">
@@ -22,7 +22,8 @@ const DebugRollbar = () => {
         Send Rollbar test
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default DebugRollbar;
+export default DebugRollbar
+

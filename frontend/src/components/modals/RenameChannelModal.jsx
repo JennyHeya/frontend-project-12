@@ -1,16 +1,16 @@
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { Modal, Form, Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSocket } from '../../services/socket.js';
-import { renameChannel } from '../../slices/channelsSlice.js';
+﻿import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { Modal, Form, Button } from 'react-bootstrap'
+import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSocket } from '../../services/socket.js'
+import { renameChannel } from '../../slices/channelsSlice.js'
 
 const RenameChannelModal = ({ show, onHide, channel }) => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const channels = useSelector((state) => state.channels.channels);
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const channels = useSelector((state) => state.channels.channels)
 
   const schema = yup.object({
     name: yup
@@ -23,27 +23,27 @@ const RenameChannelModal = ({ show, onHide, channel }) => {
         t('modals.rename.errors.unique')
       )
       .required(t('modals.rename.errors.required')),
-  });
+  })
 
   const formik = useFormik({
     initialValues: { name: channel.name },
     validationSchema: schema,
 onSubmit: (values, { setSubmitting }) => {
-      const cleanName = leoProfanity.clean(values.name);   // ← фильтруем мат
-      const socket = getSocket();
+      const cleanName = leoProfanity.clean(values.name)   // в†ђ С„РёР»СЊС‚СЂСѓРµРј РјР°С‚
+      const socket = getSocket()
 
       socket.emit('renameChannel', { id: channel.id, name: cleanName }, (response) => {
         if (response.status === 'ok') {
-          dispatch(renameChannel({ id: channel.id, name: cleanName }));
-          toast.success(t('toasts.channelRenamed'));
-          onHide();
+          dispatch(renameChannel({ id: channel.id, name: cleanName }))
+          toast.success(t('toasts.channelRenamed'))
+          onHide()
         } else {
-          toast.error(t('toasts.networkError'));
+          toast.error(t('toasts.networkError'))
         }
-        setSubmitting(false);
-      });
+        setSubmitting(false)
+      })
     },
-  });
+  })
 
   return (
     <Modal show={show} onHide={onHide} centered>
@@ -82,7 +82,8 @@ onSubmit: (values, { setSubmitting }) => {
         </Form>
       </Modal.Body>
     </Modal>
-  );
-};
+  )
+}
 
 export default RenameChannelModal
+

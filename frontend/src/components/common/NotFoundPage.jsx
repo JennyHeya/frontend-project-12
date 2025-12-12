@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+﻿import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 const NotFoundPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className="text-center p-5">
@@ -12,7 +12,8 @@ const NotFoundPage = () => {
         <Link to="/">{t('notFound.link')}</Link>
       </p>
     </div>
-  );
-};
+  )
+}
 
 export default NotFoundPage
+

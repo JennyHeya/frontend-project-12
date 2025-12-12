@@ -1,10 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
-import ChatPage from './components/chat/ChatPage.jsx';
-import LoginPage from './components/auth/LoginPage.jsx';
-import SignupPage from './components/auth/SignupPage.jsx';
-import NotFoundPage from './components/common/NotFoundPage.jsx';
-import PrivateRoute from './components/chat/PrivateRoute.jsx';
-import Header from './components/common/Header.jsx';
+﻿import { Routes, Route } from 'react-router-dom'
+import ChatPage from './components/chat/ChatPage.jsx'
+import LoginPage from './components/auth/LoginPage.jsx'
+import SignupPage from './components/auth/SignupPage.jsx'
+import NotFoundPage from './components/common/NotFoundPage.jsx'
+import PrivateRoute from './components/chat/PrivateRoute.jsx'
+import Header from './components/common/Header.jsx'
 
 const App = () => (
   <>
@@ -16,6 +16,7 @@ const App = () => (
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </>
-);
+)
 
 export default App
+

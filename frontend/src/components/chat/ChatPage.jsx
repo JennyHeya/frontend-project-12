@@ -1,102 +1,102 @@
-// frontend/src/components/chat/ChatPage.jsx
-import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form, Field } from 'formik';
-import { Button, Dropdown } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-import axios from 'axios';
-import { useAuth } from '../../contexts/AuthContext.jsx';
-import { useModal } from '../../contexts/ModalContext.jsx';
+﻿// frontend/src/components/chat/ChatPage.jsx
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Formik, Form, Field } from 'formik'
+import { Button, Dropdown } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import axios from 'axios'
+import { useAuth } from '../../contexts/AuthContext.jsx'
+import { useModal } from '../../contexts/ModalContext.jsx'
 import {
   setChannels,
   setCurrentChannel,
-} from '../../slices/channelsSlice.js';
+} from '../../slices/channelsSlice.js'
 import {
   setMessages,
   addMessage,
-} from '../../slices/messagesSlice.js';
-import { initSocket, getSocket } from '../../services/socket.js';
+} from '../../slices/messagesSlice.js'
+import { initSocket, getSocket } from '../../services/socket.js'
 
 const ChatPage = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const { getToken, user } = useAuth();
-  const { showModal } = useModal();
-  const inputRef = useRef(null);
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const { getToken, user } = useAuth()
+  const { showModal } = useModal()
+  const inputRef = useRef(null)
 
-  const { channels, currentChannelId } = useSelector((state) => state.channels);
-  const messages = useSelector((state) => state.messages.messages);
+  const { channels, currentChannelId } = useSelector((state) => state.channels)
+  const messages = useSelector((state) => state.messages.messages)
 
-  const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' };
-  const channelMessages = messages.filter((m) => m.channelId === currentChannelId);
+  const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' }
+  const channelMessages = messages.filter((m) => m.channelId === currentChannelId)
 
-  // Загрузка данных + подключение сокета
+  // Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… + РїРѕРґРєР»СЋС‡РµРЅРёРµ СЃРѕРєРµС‚Р°
   useEffect(() => {
     const fetchData = async () => {
-      const token = getToken();
-      if (!token) return;
+      const token = getToken()
+      if (!token) return
 
       try {
         const { data } = await axios.get('/api/v1/data', {
           headers: { Authorization: `Bearer ${token}` },
-        });
+        })
 
         dispatch(setChannels({
           channels: data.channels,
           currentChannelId: data.currentChannelId,
-        }));
-        dispatch(setMessages(data.messages));
+        }))
+        dispatch(setMessages(data.messages))
       } catch (err) {
-        console.error('Ошибка загрузки данных:', err);
+        console.error('РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…:', err)
       }
-    };
+    }
 
-    fetchData();
-    initSocket();
-  }, [dispatch, getToken]);
+    fetchData()
+    initSocket()
+  }, [dispatch, getToken])
 
-  // Новые сообщения через WebSocket
+  // РќРѕРІС‹Рµ СЃРѕРѕР±С‰РµРЅРёСЏ С‡РµСЂРµР· WebSocket
   useEffect(() => {
-    const socket = getSocket();
-    if (!socket) return;
+    const socket = getSocket()
+    if (!socket) return
 
     socket.on('newMessage', (payload) => {
-      dispatch(addMessage(payload));
-    });
+      dispatch(addMessage(payload))
+    })
 
-    return () => socket.off('newMessage');
-  }, [dispatch]);
+    return () => socket.off('newMessage')
+  }, [dispatch])
 
-  // Отправка сообщения
+  // РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ
 const handleSubmit = async (values, { resetForm }) => {
-    if (!values.body.trim()) return;
+    if (!values.body.trim()) return
 
-    // ← ВОТ ЭТА СТРОКА САМАЯ ВАЖНАЯ:
-    const cleanBody = leoProfanity.clean(values.body);
+    // в†ђ Р’РћРў Р­РўРђ РЎРўР РћРљРђ РЎРђРњРђРЇ Р’РђР–РќРђРЇ:
+    const cleanBody = leoProfanity.clean(values.body)
 
     const message = {
-      body: cleanBody,                    // ← отправляем уже очищенный текст
+      body: cleanBody,                    // в†ђ РѕС‚РїСЂР°РІР»СЏРµРј СѓР¶Рµ РѕС‡РёС‰РµРЅРЅС‹Р№ С‚РµРєСЃС‚
       channelId: currentChannelId,
       username: user.username,
-    };
+    }
 
-    const socket = getSocket();
+    const socket = getSocket()
 
     try {
       await new Promise((resolve, reject) => {
-        const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
+        const timeout = setTimeout(() => reject(new Error('timeout')), 5000)
         socket.emit('newMessage', message, (response) => {
-          clearTimeout(timeout);
-          response.status === 'ok' ? resolve() : reject();
-        });
-      });
-      resetForm();
-      inputRef.current?.focus();
+          clearTimeout(timeout)
+          response.status === 'ok' ? resolve() : reject()
+        })
+      })
+      resetForm()
+      inputRef.current?.focus()
 } catch (err) {
-  console.error('Ошибка загрузки данных:', err);
-  toast.error(t('toasts.networkError'));
+  console.error('РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…:', err)
+  toast.error(t('toasts.networkError'))
 }
-  };
+  }
 
   return (
     <div className="h-100">
@@ -111,7 +111,7 @@ const handleSubmit = async (values, { resetForm }) => {
 
           <div className="container h-100 my-4 overflow-hidden rounded shadow">
             <div className="row h-100 bg-white">
-              {/* === КАНАЛЫ === */}
+              {/* === РљРђРќРђР›Р« === */}
               <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
                 <div className="d-flex justify-content-between mb-2 px-4 pe-2">
                   <span>{t('chat.channels')}</span>
@@ -167,7 +167,7 @@ const handleSubmit = async (values, { resetForm }) => {
                 </ul>
               </div>
 
-              {/* === СООБЩЕНИЯ === */}
+              {/* === РЎРћРћР‘Р©Р•РќРРЇ === */}
               <div className="col p-0 h-100">
                 <div className="d-flex flex-column h-100">
                   <div className="bg-light mb-4 p-3 shadow-sm small">
@@ -187,7 +187,7 @@ const handleSubmit = async (values, { resetForm }) => {
                     ))}
                   </div>
 
-                  {/* Форма отправки */}
+                  {/* Р¤РѕСЂРјР° РѕС‚РїСЂР°РІРєРё */}
                   <div className="mt-auto px-5 py-3">
                     <Formik initialValues={{ body: '' }} onSubmit={handleSubmit}>
                       {({ isSubmitting }) => (
@@ -224,7 +224,8 @@ const handleSubmit = async (values, { resetForm }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default ChatPage
+
