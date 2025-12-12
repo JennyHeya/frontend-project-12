@@ -12,6 +12,10 @@ import App from './App.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import { ModalProvider } from './components/modals/index.jsx';
 import './i18n.js'; // ← просто импортируем
+import leoProfanity from 'leo-profanity';
+
+leoProfanity.clearList();
+leoProfanity.add(leoProfanity.getDictionary('ru'));
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

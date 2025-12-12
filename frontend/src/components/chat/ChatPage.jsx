@@ -68,11 +68,14 @@ const ChatPage = () => {
   }, [dispatch]);
 
   // Отправка сообщения
-  const handleSubmit = async (values, { resetForm }) => {
+const handleSubmit = async (values, { resetForm }) => {
     if (!values.body.trim()) return;
 
+    // ← ВОТ ЭТА СТРОКА САМАЯ ВАЖНАЯ:
+    const cleanBody = leoProfanity.clean(values.body);
+
     const message = {
-      body: values.body,
+      body: cleanBody,                    // ← отправляем уже очищенный текст
       channelId: currentChannelId,
       username: user.username,
     };

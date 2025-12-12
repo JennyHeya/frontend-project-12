@@ -28,12 +28,13 @@ const RenameChannelModal = ({ show, onHide, channel }) => {
   const formik = useFormik({
     initialValues: { name: channel.name },
     validationSchema: schema,
-    onSubmit: (values, { setSubmitting }) => {
+onSubmit: (values, { setSubmitting }) => {
+      const cleanName = leoProfanity.clean(values.name);   // ← фильтруем мат
       const socket = getSocket();
 
-      socket.emit('renameChannel', { id: channel.id, name: values.name }, (response) => {
+      socket.emit('renameChannel', { id: channel.id, name: cleanName }, (response) => {
         if (response.status === 'ok') {
-          dispatch(renameChannel({ id: channel.id, name: values.name }));
+          dispatch(renameChannel({ id: channel.id, name: cleanName }));
           toast.success(t('toasts.channelRenamed'));
           onHide();
         } else {

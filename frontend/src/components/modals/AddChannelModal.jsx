@@ -25,9 +25,9 @@ const AddChannelModal = ({ show, onHide }) => {
   const formik = useFormik({
     initialValues: { name: '' },
     validationSchema: schema,
-    onSubmit: (values, { setSubmitting }) => {
-      const socket = getSocket();
-      const newChannel = { name: values.name };
+onSubmit: (values, { setSubmitting }) => {
+      const cleanName = leoProfanity.clean(values.name);   // ← фильтруем мат
+      const newChannel = { name: cleanName };
 
       socket.emit('newChannel', newChannel, (response) => {
         if (response.status === 'ok') {
