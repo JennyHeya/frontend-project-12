@@ -1,0 +1,14 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.7.0
+2 info using node@v20.15.0
+3 silly config:load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config:load:file:C:\Users\Jenny\Documents\frontend-project-12\.npmrc
+5 silly config:load:file:C:\Users\Jenny\.npmrc
+6 silly config:load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm warn node_modules/eslint-config-airbnb
+8 verbose argv "warn" "node_modules/eslint-config-airbnb"
+9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2025-12-12T22_49_02_796Z-
+10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2025-12-12T22_49_02_796Z-debug-0.log
+11 silly logfile start cleaning logs, removing 3 files
+12 verbose exit 1
+13 verbose code 1
