@@ -4,6 +4,10 @@ build:
 start:
 	npx start-server -s ./frontend/dist
 
+install:
+	npm install
+	cd frontend && npm install
+
 dev:
 	concurrently "npm run dev --prefix frontend" "npx start-server"
 
