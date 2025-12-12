@@ -1,19 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { Formik, Form, Field } from 'formik';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { setChannels } from '../../slices/channelsSlice.js';
-import { setMessages } from '../../slices/messagesSlice.js';
+import { setMessages, addMessage } from '../../slices/messagesSlice.js';
+import { initSocket, getSocket } from '../../services/socket.js';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
-  const { getToken } = useAuth();
-  const { channels, currentChannelId } = useSelector((state) => state.channels);
-  const messages = useSelector((state) => state.messages.messages);
+  const { getToken, user } = useAuth();
+  const [sending, setSending] = useState(false);
+  const inputRef = useRef(null);
 
-  const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' };
-  const channelMessages = messages.filter((m) => m.channelId === currentChannelId);
+  const { channels, currentChannelId } = useSelector((state) => state.channels));
+  const messages = useSelector((state => state.messages.messages));
 
+  const currentChannel = channels.find(ch => ch.id === currentChannelId) || { name: 'general' };
+  const channelMessages = messages.filter(m => m.channelId === currentChannelId);
+
+  // Загрузка начальных данных
   useEffect(() => {
     const fetchData = async () => {
       const token = getToken();
@@ -35,11 +41,64 @@ const ChatPage = () => {
     };
 
     fetchData();
+    initSocket(); // ← подключаем WebSocket
   }, [dispatch, getToken]);
+
+  // Подписка на новые сообщения
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+
+    socket.on('newMessage', (payload) => {
+      dispatch(addMessage(payload));
+    });
+
+    return () => {
+      socket.off('newMessage');
+    };
+  }, [dispatch]);
+
+  // Отправка сообщения
+  const handleSubmit = async (values, { resetForm }) => {
+    if (!values.body.trim()) return;
+
+    const message = {
+      body: values.body,
+      channelId: currentChannelId,
+      username: user.username,
+    };
+
+    setSending(true);
+
+    const socket = getSocket();
+
+    try {
+      await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
+
+        socket.emit('newMessage', message, (response) => {
+          clearTimeout(timeout);
+          if (response.status === 'ok') {
+            resolve();
+          } else {
+            reject(new Error('server error'));
+          }
+        });
+      });
+
+      resetForm();
+    } catch (err) {
+      console.error('Не удалось отправить:', err);
+      // Можно показать тост или красную надпись
+    } finally {
+      setSending(false);
+      inputRef.current?.focus();
+    }
+  };
 
   return (
     <div className="h-100">
-      <div className="h-100" id="container" id="chat">
+      <div className="h-100" id="chat">
         <div className="d-flex flex-column h-100">
           <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
             <div className="container">
@@ -60,7 +119,7 @@ const ChatPage = () => {
                       <button
                         type="button"
                         className={`w-100 rounded-0 text-start btn ${channel.id === currentChannelId ? 'btn-secondary' : ''}`}
-                        onClick={() => dispatch(setCurrentChannel(channel.id))}
+                        onClick={() => dispatch({ type: 'channels/setCurrentChannel', payload: channel.id })}
                       >
                         <span className="me-1">#</span>{channel.name}
                       </button>
@@ -69,13 +128,14 @@ const ChatPage = () => {
                 </ul>
               </div>
 
-              {/* Сообщения */}
+              {/* Чат */}
               <div className="col p-0 h-100">
                 <div className="d-flex flex-column h-100">
                   <div className="bg-light mb-4 p-3 shadow-sm small">
                     <p className="m-0"><b># {currentChannel.name}</b></p>
                     <span className="text-muted">{channelMessages.length} сообщений</span>
                   </div>
+
                   <div id="messages-box" className="chat-messages overflow-auto px-5">
                     {channelMessages.map((msg) => (
                       <div key={msg.id} className="text-break mb-2">
@@ -83,22 +143,31 @@ const ChatPage = () => {
                       </div>
                     ))}
                   </div>
+
                   <div className="mt-auto px-5 py-3">
-                    <form noValidate className="py-1 border rounded-2">
-                      <div className="input-group has-validation">
-                        <input
-                          name="body"
-                          aria-label="Новое сообщение"
-                          placeholder="Введите сообщение..."
-                          className="border-0 p-0 ps-2 form-control"
-                          value=""
-                          readOnly
-                        />
-                        <button type="submit" disabled className="btn btn-group-vertical border-0">
-                          →
-                        </button>
-                      </div>
-                    </form>
+                    <Formik initialValues={{ body: '' }} onSubmit={handleSubmit}>
+                      {() => (
+                        <Form noValidate className="py-1 border rounded-2">
+                          <div className="input-group">
+                            <Field
+                              innerRef={inputRef}
+                              name="body"
+                              aria-label="Новое сообщение"
+                              placeholder="Введите сообщение..."
+                              className="border-0 p-0 ps-2 form-control"
+                              disabled={sending}
+                            />
+                            <button
+                              type="submit"
+                              disabled={sending}
+                              className="btn btn-group-vertical border-0"
+                            >
+                              {sending ? '...' : '→'}
+                            </button>
+                          </div>
+                        </Form>
+                      )}
+                    </Formik>
                   </div>
                 </div>
               </div>

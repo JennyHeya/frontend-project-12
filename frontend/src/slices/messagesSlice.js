@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addChannel } from './channelsSlice.js';
 
 const messagesSlice = createSlice({
   name: 'messages',
   initialState: {
     messages: [],
+    sendingStatus: 'idle', // idle | pending | success | failed
   },
   reducers: {
     setMessages: (state, action) => {
@@ -13,13 +13,11 @@ const messagesSlice = createSlice({
     addMessage: (state, action) => {
       state.messages.push(action.payload);
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(addChannel, (state, action) => {
-      // можно добавить приветственное сообщение, но не обязательно
-    });
+    setSendingStatus: (state, action) => {
+      state.sendingStatus = action.payload;
+    },
   },
 });
 
-export const { setMessages, addMessage } = messagesSlice.actions;
+export const { setMessages, addMessage, setSendingStatus } = messagesSlice.actions;
 export default messagesSlice.reducer
