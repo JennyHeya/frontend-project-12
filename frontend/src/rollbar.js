@@ -2,16 +2,8 @@ import Rollbar from 'rollbar'
 
 const token = import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN || '';
 
-// If no token provided, export a noop-compatible stub to avoid runtime errors
-if (!token || token === 'POST_CLIENT_ITEM_ACCESS_TOKEN') {
-  const noop = () => {};
-  export const rollbar = {
-    error: noop,
-    info: noop,
-    warn: noop,
-    configure: noop,
-  };
-} else {
+let _rollbar = null;
+if (token && token !== 'POST_CLIENT_ITEM_ACCESS_TOKEN') {
   const rollbarConfig = {
     accessToken: token,
     environment: import.meta.env.MODE || 'development',
@@ -24,5 +16,15 @@ if (!token || token === 'POST_CLIENT_ITEM_ACCESS_TOKEN') {
     },
   };
 
-  export const rollbar = new Rollbar(rollbarConfig);
+  _rollbar = new Rollbar(rollbarConfig);
+} else {
+  const noop = () => {};
+  _rollbar = {
+    error: noop,
+    info: noop,
+    warn: noop,
+    configure: noop,
+  };
 }
+
+export const rollbar = _rollbar;
