@@ -14,7 +14,7 @@ dev:
 lint:
 	npx eslint .
 
-lint:fix:
+lint-fix:
 	npx eslint . --fix
 
 format:
