@@ -89,9 +89,10 @@ const ChatPage = () => {
       });
       resetForm();
       inputRef.current?.focus();
-    } catch (err) {
-      console.error('Сообщение не отправлено:', err);
-    }
+} catch (err) {
+  console.error('Ошибка загрузки данных:', err);
+  toast.error(t('toasts.networkError'));
+}
   };
 
   return (

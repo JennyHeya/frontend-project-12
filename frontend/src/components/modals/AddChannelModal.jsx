@@ -1,16 +1,15 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Modal, Form, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAuth } from '../../contexts/AuthContext.jsx';
 import { getSocket } from '../../services/socket.js';
 import { addChannel, setCurrentChannel } from '../../slices/channelsSlice.js';
 
 const AddChannelModal = ({ show, onHide }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { user } = useAuth();
   const channels = useSelector((state) => state.channels.channels);
 
   const schema = yup.object({
@@ -34,7 +33,10 @@ const AddChannelModal = ({ show, onHide }) => {
         if (response.status === 'ok') {
           dispatch(addChannel(response.data));
           dispatch(setCurrentChannel(response.data.id));
+          toast.success(t('toasts.channelAdded'));
           onHide();
+        } else {
+          toast.error(t('toasts.networkError'));
         }
         setSubmitting(false);
       });
@@ -67,11 +69,7 @@ const AddChannelModal = ({ show, onHide }) => {
             <Button variant="secondary" onClick={onHide} className="me-2">
               {t('modals.add.cancel')}
             </Button>
-            <Button
-              variant="primary"
-              type="submit"
-              disabled={formik.isSubmitting}
-            >
+            <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
               {t('modals.add.submit')}
             </Button>
           </div>
@@ -81,4 +79,4 @@ const AddChannelModal = ({ show, onHide }) => {
   );
 };
 
-export default AddChannelModal;
+export default AddChannelModal

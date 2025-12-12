@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Modal, Form, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSocket } from '../../services/socket.js';
@@ -18,7 +19,7 @@ const RenameChannelModal = ({ show, onHide, channel }) => {
       .min(3, t('modals.rename.errors.length'))
       .max(20, t('modals.rename.errors.length'))
       .notOneOf(
-        channels.filter((c) => c.id !== channel.id).map((c) => c.name),
+        channels.filter((c) => c.id !== channel.id).map((c => c.name),
         t('modals.rename.errors.unique')
       )
       .required(t('modals.rename.errors.required')),
@@ -33,7 +34,10 @@ const RenameChannelModal = ({ show, onHide, channel }) => {
       socket.emit('renameChannel', { id: channel.id, name: values.name }, (response) => {
         if (response.status === 'ok') {
           dispatch(renameChannel({ id: channel.id, name: values.name }));
+          toast.success(t('toasts.channelRenamed'));
           onHide();
+        } else {
+          toast.error(t('toasts.networkError'));
         }
         setSubmitting(false);
       });
@@ -80,4 +84,4 @@ const RenameChannelModal = ({ show, onHide, channel }) => {
   );
 };
 
-export default RenameChannelModal;
+export default RenameChannelModal

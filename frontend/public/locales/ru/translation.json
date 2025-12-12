@@ -40,6 +40,14 @@
     "enterMessage": "Введите сообщение...",
     "send": "Отправить"
   },
+  {
+  "toasts": {
+    "channelAdded": "Канал создан",
+    "channelRemoved": "Канал удалён",
+    "channelRenamed": "Канал переименован",
+    "networkError": "Ошибка соединения"
+  }
+}
   "modals": {
     "add": {
       "title": "Добавить канал",

@@ -1,4 +1,5 @@
 import { Modal, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { getSocket } from '../../services/socket.js';
@@ -14,9 +15,11 @@ const RemoveChannelModal = ({ show, onHide, channel }) => {
     socket.emit('removeChannel', { id: channel.id }, (response) => {
       if (response.status === 'ok') {
         dispatch(removeChannel(channel.id));
-        // Если удалили текущий канал — переключаемся на general
-        dispatch(setCurrentChannel(1));
+        dispatch(setCurrentChannel(1)); // general
+        toast.success(t('toasts.channelRemoved'));
         onHide();
+      } else {
+        toast.error(t('toasts.networkError'));
       }
     });
   };
@@ -41,4 +44,4 @@ const RemoveChannelModal = ({ show, onHide, channel }) => {
   );
 };
 
-export default RemoveChannelModal;
+export default RemoveChannelModal
