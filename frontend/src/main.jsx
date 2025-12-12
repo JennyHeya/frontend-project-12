@@ -1,5 +1,4 @@
 // frontend/src/main.jsx
-window.rollbar = rollbar;
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -22,26 +21,28 @@ leoProfanity.add(leoProfanity.getDictionary('ru'));
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <AuthProvider>
-        <ModalProvider>
-          <BrowserRouter>
-            <App />
-            <ToastContainer // ← вот он, красивые уведомления
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
-          </BrowserRouter>
-        </ModalProvider>
-      </AuthProvider>
-    </Provider>
+    <ErrorBoundary rollbar={rollbar}>
+      <Provider store={store}>
+        <AuthProvider>
+          <ModalProvider>
+            <BrowserRouter>
+              <App />
+              <ToastContainer // ← вот он, красивые уведомления
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </BrowserRouter>
+          </ModalProvider>
+        </AuthProvider>
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 )

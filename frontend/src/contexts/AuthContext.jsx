@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { rollbar } from '../rollbar.js';
 
 const AuthContext = createContext({});
 
@@ -8,7 +9,15 @@ export const AuthProvider = ({ children }) => {
   const logIn = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
-    if (window.rollbar) window.rollbar.configure({ payload: { person: { id: userData.username } } });
+    if (rollbar && typeof rollbar.configure === 'function') {
+      try {
+        rollbar.configure({ payload: { person: { id: userData.username } } });
+      } catch (e) {
+        // don't let rollbar errors break auth flow
+        // eslint-disable-next-line no-console
+        console.error('Rollbar configure failed', e);
+      }
+    }
   };
 
   const logOut = () => {
