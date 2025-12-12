@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logo from '../../assets/react.svg';
 import { Formik, Form, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -20,7 +21,7 @@ const LoginPage = () => {
               <div className="card-body row p-5">
                 <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                   <img
-                    src="https://via.placeholder.com/200"
+                    src={logo}
                     className="rounded-circle"
                     alt={t('login.title')}
                   />

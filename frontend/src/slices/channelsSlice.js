@@ -17,9 +17,31 @@ const channelsSlice = createSlice({
     addChannel: (state, action) => {
       state.channels.push(action.payload)
     },
-    // дальше будут removeChannel, renameChannel — но пока не нужны
+     removeChannel: (state, action) => {
+      const channelId = action.payload
+      // Удаляем канал из массива
+      state.channels = state.channels.filter(channel => channel.id !== channelId)
+      
+      if (state.currentChannelId === channelId) {
+        state.currentChannelId = state.channels[0]?.id || 1
+      }
+    },
+    renameChannel: (state, action) => {
+      const { id, name } = action.payload
+      const channel = state.channels.find(ch => ch.id === id)
+      if (channel) {
+        channel.name = name
+      }
+    },
   },
 })
 
-export const { setChannels, setCurrentChannel, addChannel } = channelsSlice.actions
+export const { 
+  setChannels, 
+  setCurrentChannel, 
+  addChannel, 
+  removeChannel,
+  renameChannel
+} = channelsSlice.actions
+
 export default channelsSlice.reducer

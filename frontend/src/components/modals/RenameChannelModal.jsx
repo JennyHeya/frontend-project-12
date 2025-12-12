@@ -19,7 +19,7 @@ const RenameChannelModal = ({ show, onHide, channel }) => {
       .min(3, t('modals.rename.errors.length'))
       .max(20, t('modals.rename.errors.length'))
       .notOneOf(
-        channels.filter((c) => c.id !== channel.id).map((c => c.name),
+        channels.filter((c) => c.id !== channel.id).map((c) => c.name),
         t('modals.rename.errors.unique')
       )
       .required(t('modals.rename.errors.required')),

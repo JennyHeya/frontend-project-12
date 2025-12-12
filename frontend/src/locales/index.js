@@ -1,7 +1,7 @@
-import ru from './ru/translation.json';
-
 const resources = {
-  ru: { translation: ru },
-};
+  ru: {
+    translation: (await import('../../public/locales/ru/translation.json')).default,
+  },
+}
 
 export default resources
