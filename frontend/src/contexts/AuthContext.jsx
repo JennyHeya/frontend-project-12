@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const logIn = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
+    if (window.rollbar) window.rollbar.configure({ payload: { person: { id: userData.username } } });
   };
 
   const logOut = () => {

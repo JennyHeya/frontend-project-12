@@ -1,9 +1,11 @@
 // frontend/src/main.jsx
+window.rollbar = rollbar;
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify'; // ← добавь
+import { ErrorBoundary } from '@rollbar/react';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'; // для иконок в дропдауне
@@ -11,6 +13,7 @@ import store from './store/index.js';
 import App from './App.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import { ModalProvider } from './components/modals/index.jsx';
+import { rollbar } from './rollbar.js';
 import './i18n.js'; // ← просто импортируем
 import leoProfanity from 'leo-profanity';
 
