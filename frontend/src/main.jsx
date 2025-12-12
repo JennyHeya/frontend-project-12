@@ -9,6 +9,7 @@ import store from './store/index.js';
 import App from './App.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import { ModalProvider } from './components/modals/index.jsx';
+import './i18n.js'; // ← просто импортируем
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

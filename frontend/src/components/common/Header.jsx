@@ -1,8 +1,11 @@
+
 import { Navbar, Container, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 
 const Header = () => {
+  const { t } = useTranslation();
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
@@ -14,10 +17,12 @@ const Header = () => {
   return (
     <Navbar bg="white" expand="lg" className="shadow-sm">
       <Container>
-        <Navbar.Brand as={Link} to="/">Hexlet Chat</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          {t('header.brand')}
+        </Navbar.Brand>
         {user && (
           <Button variant="primary" onClick={handleLogout}>
-            Выйти
+            {t('header.logout')}
           </Button>
         )}
       </Container>

@@ -3,9 +3,10 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { Button, Dropdown } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { useAuth } from '../../contexts/AuthContext.jsx';
-import { useModal } from '../../contexts/ModalContext.jsx'; // ← создашь через минуту
+import { useModal } from '../../contexts/ModalContext.jsx';
 import {
   setChannels,
   setCurrentChannel,
@@ -17,6 +18,7 @@ import {
 import { initSocket, getSocket } from '../../services/socket.js';
 
 const ChatPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { getToken, user } = useAuth();
   const { showModal } = useModal();
@@ -28,7 +30,7 @@ const ChatPage = () => {
   const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' };
   const channelMessages = messages.filter((m) => m.channelId === currentChannelId);
 
-  // Загрузка каналов и сообщений + подключение сокета
+  // Загрузка данных + подключение сокета
   useEffect(() => {
     const fetchData = async () => {
       const token = getToken();
@@ -50,10 +52,10 @@ const ChatPage = () => {
     };
 
     fetchData();
-    initSocket(); // подключаем WebSocket один раз
+    initSocket();
   }, [dispatch, getToken]);
 
-  // Подписка на новые сообщения
+  // Новые сообщения через WebSocket
   useEffect(() => {
     const socket = getSocket();
     if (!socket) return;
@@ -99,7 +101,7 @@ const ChatPage = () => {
           {/* Navbar */}
           <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
             <div className="container">
-              <a className="navbar-brand" href="/">Hexlet Chat</a>
+              <a className="navbar-brand" href="/">{t('header.brand')}</a>
             </div>
           </nav>
 
@@ -108,11 +110,12 @@ const ChatPage = () => {
               {/* === КАНАЛЫ === */}
               <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
                 <div className="d-flex justify-content-between mb-2 px-4 pe-2">
-                  <span>Каналы</span>
+                  <span>{t('chat.channels')}</span>
                   <button
                     type="button"
                     className="p-0 text-primary btn btn-group-vertical border-0"
                     onClick={() => showModal('add')}
+                    aria-label={t('chat.addChannel')}
                   >
                     <i className="bi bi-plus-square" />
                   </button>
@@ -132,7 +135,6 @@ const ChatPage = () => {
                           # {channel.name}
                         </button>
 
-                        {/* Управление только для пользовательских каналов */}
                         {channel.removable && (
                           <Dropdown align="end">
                             <Dropdown.Toggle
@@ -140,15 +142,17 @@ const ChatPage = () => {
                               className="border-0"
                               id={`dropdown-${channel.id}`}
                             >
-                              <span className="visually-hidden">Управление каналом</span>
+                              <span className="visually-hidden">
+                                {t('chat.channelManagement')}
+                              </span>
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
                               <Dropdown.Item onClick={() => showModal('remove', channel)}>
-                                Удалить
+                                {t('chat.removeChannel')}
                               </Dropdown.Item>
                               <Dropdown.Item onClick={() => showModal('rename', channel)}>
-                                Переименовать
+                                {t('chat.renameChannel')}
                               </Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
@@ -163,8 +167,12 @@ const ChatPage = () => {
               <div className="col p-0 h-100">
                 <div className="d-flex flex-column h-100">
                   <div className="bg-light mb-4 p-3 shadow-sm small">
-                    <p className="m-0"><b># {currentChannel.name}</b></p>
-                    <span className="text-muted">{channelMessages.length} сообщений</span>
+                    <p className="m-0">
+                      <b># {currentChannel.name}</b>
+                    </p>
+                    <span className="text-muted">
+                      {t('chat.messageCount', { count: channelMessages.length })}
+                    </span>
                   </div>
 
                   <div id="messages-box" className="chat-messages overflow-auto px-5 flex-grow-1">
@@ -184,8 +192,8 @@ const ChatPage = () => {
                             <Field
                               innerRef={inputRef}
                               name="body"
-                              aria-label="Новое сообщение"
-                              placeholder="Введите сообщение..."
+                              aria-label={t('chat.newMessage')}
+                              placeholder={t('chat.enterMessage')}
                               className="border-0 p-0 ps-2 form-control"
                               disabled={isSubmitting}
                             />

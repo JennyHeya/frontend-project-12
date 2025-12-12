@@ -1,12 +1,14 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Modal, Form, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { getSocket } from '../../services/socket.js';
 import { addChannel, setCurrentChannel } from '../../slices/channelsSlice.js';
 
 const AddChannelModal = ({ show, onHide }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { user } = useAuth();
   const channels = useSelector((state) => state.channels.channels);
@@ -15,16 +17,16 @@ const AddChannelModal = ({ show, onHide }) => {
     name: yup
       .string()
       .trim()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .notOneOf(channels.map(c => c.name), 'Должно быть уникальным')
-      .required('Обязательное поле'),
+      .min(3, t('modals.add.errors.length'))
+      .max(20, t('modals.add.errors.length'))
+      .notOneOf(channels.map((c) => c.name), t('modals.add.errors.unique'))
+      .required(t('modals.add.errors.required')),
   });
 
   const formik = useFormik({
     initialValues: { name: '' },
     validationSchema: schema,
-    onSubmit: async (values, { setSubmitting) => {
+    onSubmit: (values, { setSubmitting }) => {
       const socket = getSocket();
       const newChannel = { name: values.name };
 
@@ -34,6 +36,7 @@ const AddChannelModal = ({ show, onHide }) => {
           dispatch(setCurrentChannel(response.data.id));
           onHide();
         }
+        setSubmitting(false);
       });
     },
   });
@@ -41,16 +44,17 @@ const AddChannelModal = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>{t('modals.add.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Control
               name="name"
+              placeholder={t('modals.add.label')}
               onChange={formik.handleChange}
               value={formik.values.name}
-              isInvalid={formik.touched.name && formik.errors.name}
+              isInvalid={formik.touched.name && !!formik.errors.name}
               disabled={formik.isSubmitting}
               autoFocus
             />
@@ -58,12 +62,17 @@ const AddChannelModal = ({ show, onHide }) => {
               {formik.errors.name}
             </Form.Control.Feedback>
           </Form.Group>
+
           <div className="d-flex justify-content-end mt-3">
             <Button variant="secondary" onClick={onHide} className="me-2">
-              Отменить
+              {t('modals.add.cancel')}
             </Button>
-            <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
-              Отправить
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={formik.isSubmitting}
+            >
+              {t('modals.add.submit')}
             </Button>
           </div>
         </Form>
@@ -72,4 +81,4 @@ const AddChannelModal = ({ show, onHide }) => {
   );
 };
 
-export default AddChannelModal
+export default AddChannelModal;
