@@ -5,7 +5,7 @@
   },
   "login": {
     "title": "Войти",
-    "username": "Ваш ник",
+    "username": "Имя пользователя",
     "password": "Пароль",
     "submit": "Войти",
     "noAccount": "Нет аккаунта?",
@@ -14,7 +14,7 @@
   },
   "signup": {
     "title": "Регистрация",
-    "username": "Ваш ник",
+    "username": "Имя пользователя",
     "password": "Пароль",
     "confirmPassword": "Подтвердите пароль",
     "submit": "Зарегистрироваться",
