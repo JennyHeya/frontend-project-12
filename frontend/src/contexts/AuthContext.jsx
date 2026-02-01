@@ -8,23 +8,24 @@ export const AuthProvider = ({ children }) => {
   const [initialized, setInitialized] = useState(false)
 
   const logIn = (userData) => {
-    console.log('=== logIn called ===')
-    console.log('Raw userData:', userData)
-    console.log('userData type:', typeof userData)
-    console.log('userData keys:', userData ? Object.keys(userData) : 'null')
-    
     // normalize response shape: some backends return { data: { token, username } }
     const payload = userData && userData.data ? userData.data : userData
-    console.log('After first normalization:', payload)
-    
     const normalized = typeof payload === 'string' ? { token: payload } : payload
-    console.log('After second normalization:', normalized)
-    console.log('Final normalized.token:', normalized?.token ? normalized.token.substring(0, 30) : 'MISSING')
     
+    // basic validation: reject HTML responses saved as token
+    if (normalized && typeof normalized.token === 'string') {
+      const t = normalized.token.trim()
+      if (t.startsWith('<') || t.toLowerCase().includes('<!doctype') || t.includes('<html')) {
+        // eslint-disable-next-line no-console
+        console.error('Auth login received HTML instead of token — aborting login')
+        setInitialized(true)
+        return
+      }
+    }
+
     // persist and set user state
     try {
       localStorage.setItem('user', JSON.stringify(normalized))
-      console.log('Saved to localStorage:', JSON.stringify(normalized))
     } catch (e) {
       // ignore storage errors
       // eslint-disable-next-line no-console
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     setInitialized(true)
     if (rollbar && typeof rollbar.configure === 'function') {
       try {
-        rollbar.configure({ payload: { person: { id: userData.username } } })
+        rollbar.configure({ payload: { person: { id: normalized?.username } } })
       } catch (e) {
         // don't let rollbar errors break auth flow
         // eslint-disable-next-line no-console

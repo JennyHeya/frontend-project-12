@@ -36,26 +36,20 @@ const ChatPage = () => {
     const fetchData = async () => {
       try {
         const userStr = localStorage.getItem('user')
-        console.log('User from localStorage:', userStr)
-        
-        if (!userStr) {
-          console.warn('No user data in localStorage')
-          return
-        }
+        if (!userStr) return
         
         const userData = JSON.parse(userStr)
         const token = userData?.token
         
         if (!token || typeof token !== 'string' || token.startsWith('<')) {
-          console.error('Invalid token:', token)
+          // eslint-disable-next-line no-console
+          console.error('Invalid token stored')
           return
         }
 
-        console.log('Fetching chat data with token:', token.substring(0, 20) + '...')
         const { data } = await axios.get('/api/v1/data', {
           headers: { Authorization: `Bearer ${token}` },
         })
-        console.log('Chat data loaded successfully:', data)
 
         dispatch(setChannels({
           channels: data.channels,
@@ -66,11 +60,8 @@ const ChatPage = () => {
         // Initialize socket with token after successful data load
         initSocket(token)
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error('Error loading chat data:', err.message)
-        if (err.response) {
-          console.error('Response status:', err.response.status)
-          console.error('Response data:', err.response.data)
-        }
       }
     }
 
@@ -111,10 +102,9 @@ const handleSubmit = async (values, { resetForm }) => {
       })
       resetForm()
       inputRef.current?.focus()
-} catch (err) {
-  console.error('РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…:', err)
-  toast.error(t('toasts.networkError'))
-}
+    } catch (err) {
+      toast.error(t('toasts.networkError'))
+    }
   }
 
   return (

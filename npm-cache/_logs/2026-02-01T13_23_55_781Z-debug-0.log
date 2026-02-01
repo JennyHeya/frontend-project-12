@@ -1,0 +1,42 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.7.0
+2 info using node@v20.15.0
+3 silly config:load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config:load:file:C:\Users\Jenny\Documents\frontend-project-12\.npmrc
+5 silly config:load:file:C:\Users\Jenny\.npmrc
+6 silly config:load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm exec playwright install --prefix frontend
+8 verbose argv "exec" "--" "playwright" "install" "--prefix" "frontend"
+9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_23_55_781Z-
+10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_23_55_781Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 http fetch GET 200 https://registry.npmjs.org/playwright 1684ms (cache miss)
+14 silly idealTree buildDeps
+15 silly fetch manifest playwright@1.58.1
+16 http fetch GET 200 https://registry.npmjs.org/playwright 983ms (cache miss)
+17 silly placeDep ROOT playwright@1.58.1 OK for:  want: 1.58.1
+18 silly fetch manifest playwright-core@1.58.1
+19 silly fetch manifest fsevents@2.3.2
+20 http fetch GET 200 https://registry.npmjs.org/fsevents 369ms (cache revalidated)
+21 http fetch GET 200 https://registry.npmjs.org/playwright-core 393ms (cache miss)
+22 silly placeDep ROOT fsevents@2.3.2 OK for: playwright@1.58.1 want: 2.3.2
+23 silly placeDep ROOT playwright-core@1.58.1 OK for: playwright@1.58.1 want: 1.58.1
+24 silly reify moves {}
+25 silly audit bulk request {
+25 silly audit   playwright: [ '1.58.1' ],
+25 silly audit   fsevents: [ '2.3.2' ],
+25 silly audit   'playwright-core': [ '1.58.1' ]
+25 silly audit }
+26 verbose reify failed optional dependency C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_npx\e41f203b7505f1fb\node_modules\fsevents
+27 silly reify mark deleted [
+27 silly reify   'C:\\Users\\Jenny\\Documents\\frontend-project-12\\npm-cache\\_npx\\e41f203b7505f1fb\\node_modules\\fsevents'
+27 silly reify ]
+28 silly tarball no local data for playwright-core@https://registry.npmjs.org/playwright-core/-/playwright-core-1.58.1.tgz. Extracting by manifest.
+29 silly tarball no local data for playwright@https://registry.npmjs.org/playwright/-/playwright-1.58.1.tgz. Extracting by manifest.
+30 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 275ms
+31 silly audit report {}
+32 http fetch GET 200 https://registry.npmjs.org/playwright-core/-/playwright-core-1.58.1.tgz 616ms (cache miss)
+33 http fetch GET 200 https://registry.npmjs.org/playwright/-/playwright-1.58.1.tgz 818ms (cache miss)
+34 verbose exit 1
+35 verbose code 1
