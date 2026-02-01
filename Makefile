@@ -7,6 +7,12 @@ install:
 start:
 	cd frontend && npm run start
 
+setup:
+	npm install && cd frontend/ && npm install
+
+test:
+	npx playwright test
+
 dev:
 	concurrently "npm run dev --prefix frontend" "npx @hexlet/chat-server"
 
