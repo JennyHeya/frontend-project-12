@@ -5,7 +5,7 @@ install:
 	npm install && cd frontend/ && npm install
 
 start:
-	npm run server
+	cd frontend && npm run start
 
 dev:
 	concurrently "npm run dev --prefix frontend" "npx @hexlet/chat-server"
