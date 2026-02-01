@@ -1,4 +1,5 @@
 {
+  "loading": "Загрузка...",
   "header": {
     "brand": "Hexlet Chat",
     "logout": "Выйти"
@@ -31,8 +32,9 @@
   "chat": {
     "channels": "Каналы",
     "addChannel": "Добавить канал",
-    "removeChannel": "Удалить канал",
-    "renameChannel": "Переименовать канал",
+    "removeChannel": "Удалить",
+    "renameChannel": "Переименовать",
+    "channelManagement": "Управление каналом",
     "messageCount_one": "{{count}} сообщение",
     "messageCount_few": "{{count}} сообщения",
     "messageCount_many": "{{count}} сообщений",

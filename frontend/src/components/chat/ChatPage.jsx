@@ -130,7 +130,8 @@ const handleSubmit = async (values, { resetForm }) => {
                     onClick={() => showModal('add')}
                     aria-label={t('chat.addChannel')}
                   >
-                    <i className="bi bi-plus-square" />
+                    {/* Visible plus sign for tests and accessibility */}
+                    <span className="fs-4">+</span>
                   </button>
                 </div>
 

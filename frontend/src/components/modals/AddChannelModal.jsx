@@ -4,6 +4,7 @@ import { Modal, Form, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import leo from 'leo-profanity'
 import { getSocket } from '../../services/socket.js'
 import { addChannel, setCurrentChannel } from '../../slices/channelsSlice.js'
 
@@ -25,9 +26,10 @@ const AddChannelModal = ({ show, onHide }) => {
   const formik = useFormik({
     initialValues: { name: '' },
     validationSchema: schema,
-onSubmit: (values, { setSubmitting }) => {
-      const cleanName = leoProfanity.clean(values.name)   // в†ђ С„РёР»СЊС‚СЂСѓРµРј РјР°С‚
+    onSubmit: (values, { setSubmitting }) => {
+      const cleanName = leo.clean(values.name)
       const newChannel = { name: cleanName }
+      const socket = getSocket()
 
       socket.emit('newChannel', newChannel, (response) => {
         if (response.status === 'ok') {
@@ -55,6 +57,7 @@ onSubmit: (values, { setSubmitting }) => {
               name="name"
               placeholder={t('modals.add.label')}
               onChange={formik.handleChange}
+              onKeyDown={(e) => e.key === 'Enter' && formik.submitForm()}
               value={formik.values.name}
               isInvalid={formik.touched.name && !!formik.errors.name}
               disabled={formik.isSubmitting}
