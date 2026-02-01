@@ -8,14 +8,23 @@ export const AuthProvider = ({ children }) => {
   const [initialized, setInitialized] = useState(false)
 
   const logIn = (userData) => {
+    console.log('=== logIn called ===')
+    console.log('Raw userData:', userData)
+    console.log('userData type:', typeof userData)
+    console.log('userData keys:', userData ? Object.keys(userData) : 'null')
+    
     // normalize response shape: some backends return { data: { token, username } }
     const payload = userData && userData.data ? userData.data : userData
+    console.log('After first normalization:', payload)
+    
     const normalized = typeof payload === 'string' ? { token: payload } : payload
-    console.log('logIn called with userData:', userData)
-    console.log('logIn normalized:', normalized)
+    console.log('After second normalization:', normalized)
+    console.log('Final normalized.token:', normalized?.token ? normalized.token.substring(0, 30) : 'MISSING')
+    
     // persist and set user state
     try {
       localStorage.setItem('user', JSON.stringify(normalized))
+      console.log('Saved to localStorage:', JSON.stringify(normalized))
     } catch (e) {
       // ignore storage errors
       // eslint-disable-next-line no-console

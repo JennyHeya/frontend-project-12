@@ -15,7 +15,8 @@ export const initSocket = (token) => {
 
 export const getSocket = () => {
   if (!socket) {
-    throw new Error('Socket not initialized. Call initSocket first.')
+    console.warn('Socket not initialized yet. Call initSocket(token) first.')
+    return null
   }
   return socket
 }
