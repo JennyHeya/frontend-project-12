@@ -5,6 +5,8 @@ import { Formik, Form, Field } from 'formik'
 import { Button, Dropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
+import leo from 'leo-profanity'
+import { toast } from 'react-toastify'
 import { useAuth } from '../../contexts/AuthContext.jsx'
 import { useModal } from '../../contexts/ModalContext.jsx'
 import {
@@ -30,8 +32,7 @@ const ChatPage = () => {
   const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' }
   const channelMessages = messages.filter((m) => m.channelId === currentChannelId)
 
-  // Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… + РїРѕРґРєР»СЋС‡РµРЅРёРµ СЃРѕРєРµС‚Р°
-  useEffect(() => {
+   useEffect(() => {
     const fetchData = async () => {
       const token = getToken()
       if (!token) return
@@ -55,7 +56,6 @@ const ChatPage = () => {
     initSocket()
   }, [dispatch, getToken])
 
-  // РќРѕРІС‹Рµ СЃРѕРѕР±С‰РµРЅРёСЏ С‡РµСЂРµР· WebSocket
   useEffect(() => {
     const socket = getSocket()
     if (!socket) return
@@ -67,15 +67,13 @@ const ChatPage = () => {
     return () => socket.off('newMessage')
   }, [dispatch])
 
-  // РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ
 const handleSubmit = async (values, { resetForm }) => {
     if (!values.body.trim()) return
 
-    // в†ђ Р’РћРў Р­РўРђ РЎРўР РћРљРђ РЎРђРњРђРЇ Р’РђР–РќРђРЇ:
-    const cleanBody = leoProfanity.clean(values.body)
+    const cleanBody = leo.clean(values.body)
 
     const message = {
-      body: cleanBody,                    // в†ђ РѕС‚РїСЂР°РІР»СЏРµРј СѓР¶Рµ РѕС‡РёС‰РµРЅРЅС‹Р№ С‚РµРєСЃС‚
+      body: cleanBody,
       channelId: currentChannelId,
       username: user.username,
     }

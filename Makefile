@@ -1,12 +1,11 @@
 build:
 	cd frontend && npm install && npm run build
 
-start:
-	node ./node_modules/@hexlet/chat-server/bin/index.js -s ./frontend/dist
-
 install:
-	npm install
-	cd frontend && npm install
+	npm install && cd frontend/ && npm install
+
+start:
+	npm run server
 
 dev:
 	concurrently "npm run dev --prefix frontend" "npx @hexlet/chat-server"

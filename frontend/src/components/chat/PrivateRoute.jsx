@@ -2,7 +2,8 @@
 import { useAuth } from '../../contexts/AuthContext.jsx'
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useAuth()
+  const { user, initialized } = useAuth()
+  if (!initialized) return null
   return user ? children : <Navigate to="/login" />
 }
 
