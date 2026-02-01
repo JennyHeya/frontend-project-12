@@ -8,7 +8,7 @@ import axios from 'axios'
 import leo from 'leo-profanity'
 import { toast } from 'react-toastify'
 import { useAuth } from '../../contexts/AuthContext.jsx'
-import { useModal } from '../../contexts/ModalContext.jsx'
+import { useModal } from '../modals/index.jsx'
 import {
   setChannels,
   setCurrentChannel,
