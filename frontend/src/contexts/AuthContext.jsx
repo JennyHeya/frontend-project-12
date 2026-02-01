@@ -8,8 +8,19 @@ export const AuthProvider = ({ children }) => {
   const [initialized, setInitialized] = useState(false)
 
   const logIn = (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData))
-    setUser(userData)
+    // normalize response shape: some backends return { data: { token, username } }
+    const payload = userData && userData.data ? userData.data : userData
+    const normalized = typeof payload === 'string' ? { token: payload } : payload
+    // persist and set user state
+    try {
+      localStorage.setItem('user', JSON.stringify(normalized))
+    } catch (e) {
+      // ignore storage errors
+      // eslint-disable-next-line no-console
+      console.error('Failed to persist user to localStorage', e)
+    }
+    setUser(normalized)
+    setInitialized(true)
     if (rollbar && typeof rollbar.configure === 'function') {
       try {
         rollbar.configure({ payload: { person: { id: userData.username } } })
