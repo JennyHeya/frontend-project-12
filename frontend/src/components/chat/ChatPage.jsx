@@ -42,9 +42,11 @@ const ChatPage = () => {
       }
 
       try {
+        console.log('Fetching chat data with token:', token.substring(0, 10) + '...')
         const { data } = await axios.get('/api/v1/data', {
           headers: { Authorization: `Bearer ${token}` },
         })
+        console.log('Chat data loaded successfully:', data)
 
         dispatch(setChannels({
           channels: data.channels,
@@ -52,7 +54,7 @@ const ChatPage = () => {
         }))
         dispatch(setMessages(data.messages))
       } catch (err) {
-        console.error('Error loading chat data:', err)
+        console.error('Error loading chat data:', err.message, err.response?.status)
       }
     }
 

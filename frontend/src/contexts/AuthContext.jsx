@@ -11,6 +11,8 @@ export const AuthProvider = ({ children }) => {
     // normalize response shape: some backends return { data: { token, username } }
     const payload = userData && userData.data ? userData.data : userData
     const normalized = typeof payload === 'string' ? { token: payload } : payload
+    console.log('logIn called with userData:', userData)
+    console.log('logIn normalized:', normalized)
     // persist and set user state
     try {
       localStorage.setItem('user', JSON.stringify(normalized))
