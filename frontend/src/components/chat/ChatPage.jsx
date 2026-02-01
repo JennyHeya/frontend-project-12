@@ -34,8 +34,12 @@ const ChatPage = () => {
 
    useEffect(() => {
     const fetchData = async () => {
-      const token = getToken()
-      if (!token) return
+      const userData = JSON.parse(localStorage.getItem('user'))
+      const token = userData?.token
+      if (!token) {
+        console.warn('No token found in localStorage')
+        return
+      }
 
       try {
         const { data } = await axios.get('/api/v1/data', {
@@ -48,13 +52,13 @@ const ChatPage = () => {
         }))
         dispatch(setMessages(data.messages))
       } catch (err) {
-        console.error('РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…:', err)
+        console.error('Error loading chat data:', err)
       }
     }
 
     fetchData()
     initSocket()
-  }, [dispatch, getToken])
+  }, [dispatch])
 
   useEffect(() => {
     const socket = getSocket()
