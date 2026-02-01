@@ -53,13 +53,15 @@ const ChatPage = () => {
           currentChannelId: data.currentChannelId,
         }))
         dispatch(setMessages(data.messages))
+        
+        // Initialize socket with token after successful data load
+        initSocket(token)
       } catch (err) {
         console.error('Error loading chat data:', err.message, err.response?.status)
       }
     }
 
     fetchData()
-    initSocket()
   }, [dispatch])
 
   useEffect(() => {
