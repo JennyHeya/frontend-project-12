@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     }
     setInitialized(true)
   }, [])
-  }, [])
+
 
   return (
     <AuthContext.Provider value={{ user, logIn, logOut, getToken, initialized }}>
