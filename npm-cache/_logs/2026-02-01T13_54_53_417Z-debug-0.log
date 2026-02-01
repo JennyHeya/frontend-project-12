@@ -7,8 +7,8 @@
 6 silly config:load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
 7 verbose title npm install
 8 verbose argv "install"
-9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T10_43_29_011Z-
-10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T10_43_29_011Z-debug-0.log
+9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_54_53_417Z-
+10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_54_53_417Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 silly idealTree buildDeps
@@ -99,6 +99,7 @@
 18 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
 18 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
 18 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+18 silly audit   '@playwright/test': [ '1.52.0' ],
 18 silly audit   '@popperjs/core': [ '2.11.8' ],
 18 silly audit   '@react-aria/focus': [ '3.21.2' ],
 18 silly audit   '@react-aria/interactions': [ '3.25.6' ],
@@ -245,7 +246,7 @@
 18 silly audit   'form-data': [ '4.0.5' ],
 18 silly audit   formik: [ '2.4.9' ],
 18 silly audit   'french-badwords-list': [ '1.0.7' ],
-18 silly audit   fsevents: [ '2.3.3' ],
+18 silly audit   fsevents: [ '2.3.3', '2.3.2' ],
 18 silly audit   'function-bind': [ '1.1.2' ],
 18 silly audit   gensync: [ '1.0.0-beta.2' ],
 18 silly audit   'get-intrinsic': [ '1.3.0' ],
@@ -322,6 +323,8 @@
 18 silly audit   'path-to-regexp': [ '3.3.0' ],
 18 silly audit   picocolors: [ '1.1.1' ],
 18 silly audit   picomatch: [ '4.0.3' ],
+18 silly audit   playwright: [ '1.52.0' ],
+18 silly audit   'playwright-core': [ '1.52.0' ],
 18 silly audit   postcss: [ '8.5.6' ],
 18 silly audit   'prelude-ls': [ '1.2.1' ],
 18 silly audit   'prop-types': [ '15.8.1' ],
@@ -587,52 +590,65 @@
 110 silly reify mark deleted [
 110 silly reify   'C:\\Users\\Jenny\\Documents\\frontend-project-12\\frontend\\node_modules\\@esbuild\\aix-ppc64'
 110 silly reify ]
-111 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 541ms
-112 silly audit report {
-112 silly audit report   '@remix-run/router': [
-112 silly audit report     {
-112 silly audit report       id: 1112052,
-112 silly audit report       url: 'https://github.com/advisories/GHSA-2w69-qvjg-hvjx',
-112 silly audit report       title: 'React Router vulnerable to XSS via Open Redirects',
-112 silly audit report       severity: 'high',
-112 silly audit report       vulnerable_versions: '<=1.23.1',
-112 silly audit report       cwe: [Array],
-112 silly audit report       cvss: [Object]
-112 silly audit report     }
-112 silly audit report   ],
-112 silly audit report   lodash: [
-112 silly audit report     {
-112 silly audit report       id: 1112455,
-112 silly audit report       url: 'https://github.com/advisories/GHSA-xxjr-mmjv-4gpg',
-112 silly audit report       title: 'Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions',
-112 silly audit report       severity: 'moderate',
-112 silly audit report       vulnerable_versions: '>=4.0.0 <=4.17.22',
-112 silly audit report       cwe: [Array],
-112 silly audit report       cvss: [Object]
-112 silly audit report     }
-112 silly audit report   ],
-112 silly audit report   'lodash-es': [
-112 silly audit report     {
-112 silly audit report       id: 1112453,
-112 silly audit report       url: 'https://github.com/advisories/GHSA-xxjr-mmjv-4gpg',
-112 silly audit report       title: 'Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions',
-112 silly audit report       severity: 'moderate',
-112 silly audit report       vulnerable_versions: '>=4.0.0 <=4.17.22',
-112 silly audit report       cwe: [Array],
-112 silly audit report       cvss: [Object]
-112 silly audit report     }
-112 silly audit report   ]
-112 silly audit report }
-113 http fetch GET 200 https://registry.npmjs.org/lodash 13ms (cache hit)
-114 http fetch GET 200 https://registry.npmjs.org/@remix-run%2frouter 14ms (cache hit)
-115 http fetch GET 200 https://registry.npmjs.org/lodash-es 16ms (cache hit)
-116 http fetch GET 200 https://registry.npmjs.org/react-router-dom 6ms (cache hit)
-117 http fetch GET 200 https://registry.npmjs.org/react-router 19ms (cache hit)
-118 http fetch GET 200 https://registry.npmjs.org/formik 4ms (cache hit)
-119 silly ADD
-120 silly ADD
-121 silly ADD
-122 silly ADD
+111 verbose reify failed optional dependency C:\Users\Jenny\Documents\frontend-project-12\frontend\node_modules\playwright\node_modules\fsevents
+112 silly reify mark deleted [
+112 silly reify   'C:\\Users\\Jenny\\Documents\\frontend-project-12\\frontend\\node_modules\\playwright\\node_modules\\fsevents'
+112 silly reify ]
+113 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 544ms
+114 silly audit report {
+114 silly audit report   '@remix-run/router': [
+114 silly audit report     {
+114 silly audit report       id: 1112052,
+114 silly audit report       url: 'https://github.com/advisories/GHSA-2w69-qvjg-hvjx',
+114 silly audit report       title: 'React Router vulnerable to XSS via Open Redirects',
+114 silly audit report       severity: 'high',
+114 silly audit report       vulnerable_versions: '<=1.23.1',
+114 silly audit report       cwe: [Array],
+114 silly audit report       cvss: [Object]
+114 silly audit report     }
+114 silly audit report   ],
+114 silly audit report   lodash: [
+114 silly audit report     {
+114 silly audit report       id: 1112455,
+114 silly audit report       url: 'https://github.com/advisories/GHSA-xxjr-mmjv-4gpg',
+114 silly audit report       title: 'Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions',
+114 silly audit report       severity: 'moderate',
+114 silly audit report       vulnerable_versions: '>=4.0.0 <=4.17.22',
+114 silly audit report       cwe: [Array],
+114 silly audit report       cvss: [Object]
+114 silly audit report     }
+114 silly audit report   ],
+114 silly audit report   'lodash-es': [
+114 silly audit report     {
+114 silly audit report       id: 1112453,
+114 silly audit report       url: 'https://github.com/advisories/GHSA-xxjr-mmjv-4gpg',
+114 silly audit report       title: 'Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions',
+114 silly audit report       severity: 'moderate',
+114 silly audit report       vulnerable_versions: '>=4.0.0 <=4.17.22',
+114 silly audit report       cwe: [Array],
+114 silly audit report       cvss: [Object]
+114 silly audit report     }
+114 silly audit report   ],
+114 silly audit report   playwright: [
+114 silly audit report     {
+114 silly audit report       id: 1109208,
+114 silly audit report       url: 'https://github.com/advisories/GHSA-7mvr-c777-76hp',
+114 silly audit report       title: 'Playwright downloads and installs browsers without verifying the authenticity of the SSL certificate',
+114 silly audit report       severity: 'high',
+114 silly audit report       vulnerable_versions: '<1.55.1',
+114 silly audit report       cwe: [Array],
+114 silly audit report       cvss: [Object]
+114 silly audit report     }
+114 silly audit report   ]
+114 silly audit report }
+115 http fetch GET 200 https://registry.npmjs.org/lodash 18ms (cache hit)
+116 http fetch GET 200 https://registry.npmjs.org/lodash-es 97ms (cache revalidated)
+117 http fetch GET 200 https://registry.npmjs.org/playwright 322ms (cache revalidated)
+118 http fetch GET 200 https://registry.npmjs.org/@remix-run%2frouter 512ms (cache revalidated)
+119 http fetch GET 200 https://registry.npmjs.org/react-router 96ms (cache revalidated)
+120 http fetch GET 200 https://registry.npmjs.org/react-router-dom 111ms (cache revalidated)
+121 http fetch GET 200 https://registry.npmjs.org/formik 103ms (cache revalidated)
+122 http fetch GET 200 https://registry.npmjs.org/@playwright%2ftest 552ms (cache miss)
 123 silly ADD
 124 silly ADD
 125 silly ADD
@@ -675,5 +691,10 @@
 162 silly ADD
 163 silly ADD
 164 silly ADD
-165 verbose exit 0
-166 info ok
+165 silly ADD
+166 silly ADD
+167 silly ADD
+168 silly ADD
+169 silly ADD
+170 verbose exit 0
+171 info ok

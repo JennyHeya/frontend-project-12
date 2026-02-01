@@ -1,0 +1,15 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.7.0
+2 info using node@v20.15.0
+3 silly config:load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 warn invalid config prefix=true set in command line options
+5 warn invalid config Must be valid filesystem path
+6 silly config:load:file:C:\Users\Jenny\Documents\frontend-project-12\.npmrc
+7 silly config:load:file:C:\Users\Jenny\.npmrc
+8 silly config:load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
+9 verbose title npm run start
+10 verbose argv "run" "start" "--prefix"
+11 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_56_10_700Z-
+12 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_56_10_700Z-debug-0.log
+13 silly logfile start cleaning logs, removing 1 files
+14 silly logfile done cleaning log files

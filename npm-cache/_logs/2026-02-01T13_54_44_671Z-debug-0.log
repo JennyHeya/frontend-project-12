@@ -7,15 +7,15 @@
 6 silly config:load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
 7 verbose title npm install
 8 verbose argv "install"
-9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T10_43_24_072Z-
-10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T10_43_24_072Z-debug-0.log
+9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_54_44_671Z-
+10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-01T13_54_44_671Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 silly idealTree buildDeps
 14 silly fetch manifest eslint@^7.32.0 || ^8.2.0
-15 http fetch GET 200 https://registry.npmjs.org/eslint 75ms (cache hit)
+15 http fetch GET 200 https://registry.npmjs.org/eslint 481ms (cache revalidated)
 16 silly fetch manifest eslint-plugin-react-hooks@^4.3.0
-17 http fetch GET 200 https://registry.npmjs.org/eslint-plugin-react-hooks 17ms (cache hit)
+17 http fetch GET 200 https://registry.npmjs.org/eslint-plugin-react-hooks 104ms (cache revalidated)
 18 warn ERESOLVE overriding peer dependency {
 18 warn ERESOLVE   code: 'ERESOLVE',
 18 warn ERESOLVE   edge: {
@@ -624,7 +624,7 @@
 24 silly reify mark deleted [
 24 silly reify   'C:\\Users\\Jenny\\Documents\\frontend-project-12\\node_modules\\fsevents'
 24 silly reify ]
-25 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 560ms
+25 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 242ms
 26 silly audit report {
 26 silly audit report   'fast-jwt': [
 26 silly audit report     {
@@ -649,10 +649,10 @@
 26 silly audit report     }
 26 silly audit report   ]
 26 silly audit report }
-27 http fetch GET 200 https://registry.npmjs.org/lodash 6ms (cache hit)
-28 http fetch GET 200 https://registry.npmjs.org/fast-jwt 9ms (cache hit)
-29 http fetch GET 200 https://registry.npmjs.org/@fastify%2fjwt 4ms (cache hit)
-30 http fetch GET 200 https://registry.npmjs.org/@hexlet%2fchat-server 4ms (cache hit)
+27 http fetch GET 200 https://registry.npmjs.org/lodash 90ms (cache revalidated)
+28 http fetch GET 200 https://registry.npmjs.org/fast-jwt 319ms (cache revalidated)
+29 http fetch GET 200 https://registry.npmjs.org/@fastify%2fjwt 103ms (cache revalidated)
+30 http fetch GET 200 https://registry.npmjs.org/@hexlet%2fchat-server 828ms (cache revalidated)
 31 silly ADD
 32 verbose exit 0
 33 info ok
