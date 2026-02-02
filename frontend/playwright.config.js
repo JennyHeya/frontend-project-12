@@ -20,7 +20,11 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'cd .. && npx @hexlet/chat-server -s ./frontend/dist',
+    // Use the frontend's `start` script to serve the built `dist` directory.
+    // Running Playwright from the `frontend` folder means `npm run start`
+    // will serve `./dist` without invoking the external wrapper that
+    // can fail inside CI containers with permission errors.
+    command: 'npm run start',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
