@@ -7,7 +7,7 @@ install:
 start:
 	# start backend server that serves static frontend and API
 	# use chat-server so API endpoints are available for tests
-	npm run start --prefix frontend
+	node ./node_modules/@hexlet/chat-server/bin/index.js -s ./frontend/dist
 
 setup:
 	npm install && cd frontend/ && npm install
