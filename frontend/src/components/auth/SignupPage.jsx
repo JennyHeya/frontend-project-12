@@ -19,15 +19,15 @@ const SignupPage = () => {
       .trim()
       .min(3, t('signup.errors.usernameLength'))
       .max(20, t('signup.errors.usernameLength'))
-      .required(t('signup.errors.required')),
+      .required(t('signup.errors.required')), 
     password: yup
       .string()
       .min(6, t('signup.errors.passwordLength'))
-      .required(t('signup.errors.required')),
+      .required(t('signup.errors.required')), 
     confirmPassword: yup
       .string()
       .oneOf([yup.ref('password')], t('signup.errors.passwordMatch'))
-      .required(t('signup.errors.required')),
+      .required(t('signup.errors.required')), 
   })
 
   return (
@@ -71,7 +71,7 @@ const SignupPage = () => {
                   >
                     {({ errors, touched, isSubmitting }) => (
                       <Form>
-                        <div className="mb-3">
+                        <div className="form-floating mb-3">
                           <Field
                             name="username"
                             id="username"
@@ -79,12 +79,13 @@ const SignupPage = () => {
                             autoComplete="username"
                             className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
                           />
+                          <label htmlFor="username">{t('signup.username')}</label>
                           {touched.username && errors.username && (
                             <div className="invalid-feedback">{errors.username}</div>
                           )}
                         </div>
 
-                        <div className="mb-3">
+                        <div className="form-floating mb-3">
                           <Field
                             name="password"
                             id="password"
@@ -93,12 +94,13 @@ const SignupPage = () => {
                             autoComplete="new-password"
                             className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
                           />
+                          <label htmlFor="password">{t('signup.password')}</label>
                           {touched.password && errors.password && (
                             <div className="invalid-feedback">{errors.password}</div>
                           )}
                         </div>
 
-                        <div className="mb-3">
+                        <div className="form-floating mb-3">
                           <Field
                             name="confirmPassword"
                             id="confirmPassword"
@@ -107,6 +109,7 @@ const SignupPage = () => {
                             autoComplete="new-password"
                             className={`form-control ${touched.confirmPassword && errors.confirmPassword ? 'is-invalid' : ''}`}
                           />
+                          <label htmlFor="confirmPassword">{t('signup.confirmPassword')}</label>
                           {touched.confirmPassword && errors.confirmPassword && (
                             <div className="invalid-feedback">{errors.confirmPassword}</div>
                           )}
