@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import logo from '../../assets/react.svg'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
@@ -12,9 +12,6 @@ const SignupPage = () => {
   const navigate = useNavigate()
   const { logIn } = useAuth()
   const { t } = useTranslation()
-
-  // eslint-disable-next-line no-console
-  console.log('[SignupPage] Rendering signup page')
 
   const schema = yup.object({
     username: yup
@@ -77,6 +74,7 @@ const SignupPage = () => {
                         <div className="mb-3">
                           <Field
                             name="username"
+                            id="username"
                             placeholder={t('signup.username')}
                             autoComplete="username"
                             className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
@@ -89,6 +87,7 @@ const SignupPage = () => {
                         <div className="mb-3">
                           <Field
                             name="password"
+                            id="password"
                             type="password"
                             placeholder={t('signup.password')}
                             autoComplete="new-password"
@@ -102,6 +101,7 @@ const SignupPage = () => {
                         <div className="mb-3">
                           <Field
                             name="confirmPassword"
+                            id="confirmPassword"
                             type="password"
                             placeholder={t('signup.confirmPassword')}
                             autoComplete="new-password"
@@ -121,7 +121,7 @@ const SignupPage = () => {
                           className="w-100 btn btn-outline-primary"
                           disabled={isSubmitting}
                         >
-                          {isSubmitting ? t('signup.submit') + '...' : t('signup.submit')}
+                          {t('signup.submit')}
                         </button>
                       </Form>
                     )}
@@ -142,4 +142,3 @@ const SignupPage = () => {
 }
 
 export default SignupPage
-
