@@ -1,4 +1,4 @@
-﻿import translation from '../../public/locales/ru/translation.json'
+﻿import translation from './ru/translation.json'
 
 const resources = {
   ru: {

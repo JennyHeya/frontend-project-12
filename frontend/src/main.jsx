@@ -16,8 +16,14 @@ import { rollbar, isRollbarEnabled } from './rollbar.js'
 import './i18n.js' // в†ђ РїСЂРѕСЃС‚Рѕ РёРјРїРѕСЂС‚РёСЂСѓРµРј
 import leoProfanity from 'leo-profanity'
 
+// eslint-disable-next-line no-console
+console.log('[main] Starting app initialization')
+
 leoProfanity.clearList()
 leoProfanity.add(leoProfanity.getDictionary('ru'))
+
+// eslint-disable-next-line no-console
+console.log('[main] Creating React root and rendering app')
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
