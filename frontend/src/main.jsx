@@ -12,7 +12,7 @@ import store from './store/index.js'
 import App from './App.jsx'
 import { AuthProvider } from './contexts/AuthContext.jsx'
 import { ModalProvider } from './components/modals/index.jsx'
-import { rollbar } from './rollbar.js'
+import { rollbar, isRollbarEnabled } from './rollbar.js'
 import './i18n.js' // в†ђ РїСЂРѕСЃС‚Рѕ РёРјРїРѕСЂС‚РёСЂСѓРµРј
 import leoProfanity from 'leo-profanity'
 
@@ -21,13 +21,37 @@ leoProfanity.add(leoProfanity.getDictionary('ru'))
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ErrorBoundary rollbar={rollbar}>
+    {isRollbarEnabled ? (
+      <ErrorBoundary rollbar={rollbar}>
+        <Provider store={store}>
+          <AuthProvider>
+            <ModalProvider>
+              <BrowserRouter>
+                <App />
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+              </BrowserRouter>
+            </ModalProvider>
+          </AuthProvider>
+        </Provider>
+      </ErrorBoundary>
+    ) : (
       <Provider store={store}>
         <AuthProvider>
           <ModalProvider>
             <BrowserRouter>
               <App />
-              <ToastContainer // в†ђ РІРѕС‚ РѕРЅ, РєСЂР°СЃРёРІС‹Рµ СѓРІРµРґРѕРјР»РµРЅРёСЏ
+              <ToastContainer
                 position="top-right"
                 autoClose={3000}
                 hideProgressBar={false}
@@ -43,7 +67,7 @@ createRoot(document.getElementById('root')).render(
           </ModalProvider>
         </AuthProvider>
       </Provider>
-    </ErrorBoundary>
+    )}
   </React.StrictMode>
 )
 

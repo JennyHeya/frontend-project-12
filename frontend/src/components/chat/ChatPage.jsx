@@ -29,8 +29,8 @@ const ChatPage = () => {
   const { channels, currentChannelId } = useSelector((state) => state.channels)
   const messages = useSelector((state) => state.messages.messages)
 
-  const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' }
-  const channelMessages = messages.filter((m) => m.channelId === currentChannelId)
+  const currentChannel = (Array.isArray(channels) ? channels : []).find((ch) => ch.id === currentChannelId) || { name: 'general' }
+  const channelMessages = (Array.isArray(messages) ? messages : []).filter((m) => m.channelId === currentChannelId)
 
    useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +50,13 @@ const ChatPage = () => {
         const { data } = await axios.get('/api/v1/data', {
           headers: { Authorization: `Bearer ${token}` },
         })
+
+        // Валидация ответа
+        if (!data || !Array.isArray(data.channels) || !Array.isArray(data.messages)) {
+          // eslint-disable-next-line no-console
+          console.error('Invalid API response:', data)
+          return
+        }
 
         dispatch(setChannels({
           channels: data.channels,

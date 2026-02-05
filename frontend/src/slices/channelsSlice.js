@@ -8,8 +8,8 @@ const channelsSlice = createSlice({
   },
   reducers: {
     setChannels: (state, action) => {
-      state.channels = action.payload.channels
-      state.currentChannelId = action.payload.currentChannelId
+      state.channels = Array.isArray(action.payload.channels) ? action.payload.channels : []
+      state.currentChannelId = action.payload.currentChannelId ?? state.currentChannelId
     },
     setCurrentChannel: (state, action) => {
       state.currentChannelId = action.payload

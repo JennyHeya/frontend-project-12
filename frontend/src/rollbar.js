@@ -3,7 +3,8 @@
 const token = import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN || ''
 
 let _rollbar = null
-if (token && token !== 'POST_CLIENT_ITEM_ACCESS_TOKEN') {
+export const isRollbarEnabled = Boolean(token && token !== 'POST_CLIENT_ITEM_ACCESS_TOKEN')
+if (isRollbarEnabled) {
   const rollbarConfig = {
     accessToken: token,
     environment: import.meta.env.MODE || 'development',
