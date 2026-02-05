@@ -50,13 +50,21 @@ export const AuthProvider = ({ children }) => {
   }
 
   const getToken = () => {
-    const userData = JSON.parse(localStorage.getItem('user'))
-    return userData?.token
+    try {
+      const userData = JSON.parse(localStorage.getItem('user'))
+      return userData?.token
+    } catch (e) {
+      return null
+    }
   }
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user'))
-    if (userData && userData.token) {
-      setUser(userData)
+    try {
+      const userData = JSON.parse(localStorage.getItem('user'))
+      if (userData && userData.token) {
+        setUser(userData)
+      }
+    } catch (e) {
+      // localStorage is empty or malformed; stay logged out
     }
     setInitialized(true)
   }, [])
