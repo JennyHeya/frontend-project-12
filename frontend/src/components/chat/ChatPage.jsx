@@ -1,4 +1,4 @@
-﻿// frontend/src/components/chat/ChatPage.jsx
+// frontend/src/components/chat/ChatPage.jsx
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
@@ -32,15 +32,15 @@ const ChatPage = () => {
   const currentChannel = (Array.isArray(channels) ? channels : []).find((ch) => ch.id === currentChannelId) || { name: 'general' }
   const channelMessages = (Array.isArray(messages) ? messages : []).filter((m) => m.channelId === currentChannelId)
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const userStr = localStorage.getItem('user')
         if (!userStr) return
-        
+
         const userData = JSON.parse(userStr)
         const token = userData?.token
-        
+
         if (!token || typeof token !== 'string' || token.startsWith('<')) {
           // eslint-disable-next-line no-console
           console.error('Invalid token stored')
@@ -51,7 +51,6 @@ const ChatPage = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
 
-        // Валидация ответа
         if (!data || !Array.isArray(data.channels) || !Array.isArray(data.messages)) {
           // eslint-disable-next-line no-console
           console.error('Invalid API response:', data)
@@ -63,8 +62,7 @@ const ChatPage = () => {
           currentChannelId: data.currentChannelId,
         }))
         dispatch(setMessages(data.messages))
-        
-        // Initialize socket with token after successful data load
+
         initSocket(token)
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -86,7 +84,7 @@ const ChatPage = () => {
     return () => socket.off('newMessage')
   }, [dispatch])
 
-const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     if (!values.body.trim()) return
 
     const cleanBody = leo.clean(values.body)
@@ -118,16 +116,9 @@ const handleSubmit = async (values, { resetForm }) => {
     <div className="h-100">
       <div className="h-100" id="chat">
         <div className="d-flex flex-column h-100">
-          {/* Navbar */}
-          <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-            <div className="container">
-              <a className="navbar-brand" href="/">{t('header.brand')}</a>
-            </div>
-          </nav>
-
           <div className="container h-100 my-4 overflow-hidden rounded shadow">
             <div className="row h-100 bg-white">
-              {/* === РљРђРќРђР›Р« === */}
+              {/* Channels */}
               <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
                 <div className="d-flex justify-content-between mb-2 px-4 pe-2">
                   <span>{t('chat.channels')}</span>
@@ -137,7 +128,6 @@ const handleSubmit = async (values, { resetForm }) => {
                     onClick={() => showModal('add')}
                     aria-label={t('chat.addChannel')}
                   >
-                    {/* Visible plus sign for tests and accessibility */}
                     <span className="fs-4">+</span>
                   </button>
                 </div>
@@ -153,7 +143,8 @@ const handleSubmit = async (values, { resetForm }) => {
                           }`}
                           onClick={() => dispatch(setCurrentChannel(channel.id))}
                         >
-                          # {channel.name}
+                          <span className="me-1">#</span>
+                          {channel.name}
                         </button>
 
                         {channel.removable && (
@@ -184,7 +175,7 @@ const handleSubmit = async (values, { resetForm }) => {
                 </ul>
               </div>
 
-              {/* === РЎРћРћР‘Р©Р•РќРРЇ === */}
+              {/* Messages */}
               <div className="col p-0 h-100">
                 <div className="d-flex flex-column h-100">
                   <div className="bg-light mb-4 p-3 shadow-sm small">
@@ -204,7 +195,6 @@ const handleSubmit = async (values, { resetForm }) => {
                     ))}
                   </div>
 
-                  {/* Р¤РѕСЂРјР° РѕС‚РїСЂР°РІРєРё */}
                   <div className="mt-auto px-5 py-3">
                     <Formik initialValues={{ body: '' }} onSubmit={handleSubmit}>
                       {({ isSubmitting }) => (
@@ -245,4 +235,3 @@ const handleSubmit = async (values, { resetForm }) => {
 }
 
 export default ChatPage
-
