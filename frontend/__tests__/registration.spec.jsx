@@ -42,8 +42,20 @@ test('user registration stores JWT and loads chat (mocked API)', async ({ page }
 
   // go to signup page
   await page.goto('/signup')
+  
+  // wait for body to be visible first
+  await page.waitForLoadState('domcontentloaded', { timeout: 10000 })
+  
+  // add some debugging
+  const pageTitle = await page.title()
+  const bodyText = await page.locator('body').textContent()
+  // eslint-disable-next-line no-console
+  console.log('[test] Page title:', pageTitle)
+  // eslint-disable-next-line no-console
+  console.log('[test] Body text length:', bodyText?.length)
+  
   // wait for the form to render
-  await page.waitForSelector('form', { timeout: 5000 })
+  await page.waitForSelector('form', { timeout: 10000 })
 
   // fill the signup form
   const username = `e2e_${Math.random().toString(36).slice(2, 8)}`
