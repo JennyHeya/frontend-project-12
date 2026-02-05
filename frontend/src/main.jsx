@@ -31,8 +31,12 @@ window.addEventListener('unhandledrejection', (event) => {
   console.error('[unhandled rejection]', event.reason)
 })
 
-leoProfanity.clearList()
-leoProfanity.add(leoProfanity.getDictionary('ru'))
+// Initialize leo-profanity asynchronously to not block app startup
+const initProfanity = () => {
+  leoProfanity.clearList()
+  leoProfanity.add(leoProfanity.getDictionary('ru'))
+}
+initProfanity()
 
 // eslint-disable-next-line no-console
 console.log('[main] Creating React root and rendering app')
@@ -90,4 +94,7 @@ createRoot(document.getElementById('root')).render(
     </React.StrictMode>
   </CustomErrorBoundary>
 )
+
+// eslint-disable-next-line no-console
+console.log('[main] App render complete')
 
