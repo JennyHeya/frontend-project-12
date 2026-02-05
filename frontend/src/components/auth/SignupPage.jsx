@@ -13,6 +13,9 @@ const SignupPage = () => {
   const { logIn } = useAuth()
   const { t } = useTranslation()
 
+  // eslint-disable-next-line no-console
+  console.log('[SignupPage] Rendering signup page')
+
   const schema = yup.object({
     username: yup
       .string()
