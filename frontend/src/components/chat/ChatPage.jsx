@@ -35,15 +35,8 @@ const ChatPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userStr = localStorage.getItem('user')
-        if (!userStr) return
-
-        const userData = JSON.parse(userStr)
-        const token = userData?.token
-
+        const token = user?.token
         if (!token || typeof token !== 'string' || token.startsWith('<')) {
-          // eslint-disable-next-line no-console
-          console.error('Invalid token stored')
           return
         }
 
@@ -71,7 +64,7 @@ const ChatPage = () => {
     }
 
     fetchData()
-  }, [dispatch])
+  }, [dispatch, user])
 
   useEffect(() => {
     const socket = getSocket()
