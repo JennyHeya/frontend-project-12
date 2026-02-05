@@ -1,6 +1,8 @@
-﻿const resources = {
+﻿import translation from '../../public/locales/ru/translation.json'
+
+const resources = {
   ru: {
-    translation: (await import('../../public/locales/ru/translation.json')).default,
+    translation,
   },
 }
 
