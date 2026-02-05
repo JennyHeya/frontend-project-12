@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import logo from '../../assets/react.svg'
 import { Formik, Form, Field } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
@@ -47,7 +47,7 @@ const LoginPage = () => {
                   >
                     {({ isSubmitting }) => (
                       <Form>
-                        <div className="mb-3">
+                        <div className="form-floating mb-3">
                           <Field
                             name="username"
                             autoComplete="username"
@@ -56,9 +56,10 @@ const LoginPage = () => {
                             id="username"
                             className="form-control"
                           />
+                          <label htmlFor="username">{t('login.username')}</label>
                         </div>
 
-                        <div className="mb-3">
+                        <div className="form-floating mb-3">
                           <Field
                             name="password"
                             autoComplete="current-password"
@@ -68,8 +69,9 @@ const LoginPage = () => {
                             id="password"
                             className="form-control"
                           />
+                          <label htmlFor="password">{t('login.password')}</label>
                           {authFailed && (
-                            <div className="text-danger mt-2">
+                            <div className="invalid-tooltip d-block">
                               {t('login.error')}
                             </div>
                           )}
@@ -101,4 +103,3 @@ const LoginPage = () => {
 }
 
 export default LoginPage
-
