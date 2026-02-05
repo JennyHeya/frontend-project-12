@@ -20,10 +20,10 @@ export default defineConfig({
   ],
 
   webServer: {
-    // Use the frontend start script to serve the built `dist` directory.
-    // This avoids running the `@hexlet/chat-server` wrapper which can
-    // cause permission issues inside some CI containers.
-    command: 'npm run start --prefix frontend',
+    // Start the chat backend (API + socket) via node directly so tests
+    // have both static files and API/socket endpoints available.
+    // Avoid executing the package's `start-server` bin directly.
+    command: 'node ./node_modules/@hexlet/chat-server/bin/index.js -s ./frontend/dist',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
