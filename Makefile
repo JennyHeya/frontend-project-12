@@ -1,31 +1,24 @@
-build:
-	cd frontend && npm install && npm run build
+lint-frontend:
+	make -C frontend lint
 
 install:
-	npm install && cd frontend/ && npm install
+	npm ci
+
+start-frontend:
+	make -C frontend start
+
+start-backend:
+	npx start-server -s ./frontend/dist
+
+deploy:
+	git push heroku main
 
 start:
-	# start backend server that serves static frontend and API
-	# use chat-server so API endpoints are available for tests
-	node ./node_modules/@hexlet/chat-server/bin/index.js -s ./frontend/dist
+	make start-backend
 
-setup:
-	npm install && cd frontend/ && npm install
+develop:
+	make start-backend & make start-frontend
 
-test:
-	cd frontend && npx playwright test
-
-test-with-backend:
-	concurrently --kill-others "npx @hexlet/chat-server" "cd frontend && npx playwright test"
-
-dev:
-	concurrently "npm run dev --prefix frontend" "npx @hexlet/chat-server"
-
-lint:
-	npx eslint .
-
-lint-fix:
-	npx eslint . --fix
-
-format:
-	npx prettier --write "**/*.{js,jsx,json,md}"
+build:
+	rm -rf frontend/dist
+	npm run build
