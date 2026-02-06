@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:5001',
     trace: 'on-first-retry',
   },
 
@@ -23,8 +23,9 @@ export default defineConfig({
     // Start the chat backend (API + socket) using the project-installed
     // chat-server node script. When Playwright runs from `frontend/`,
     // the chat-server package is available in the parent `node_modules`.
-    command: 'node ../node_modules/@hexlet/chat-server/bin/index.js -s ./dist',
-    url: 'http://localhost:3000',
+    // Specify port to ensure tests and server agree.
+    command: 'node ../node_modules/@hexlet/chat-server/bin/index.js -s ./dist -p 5001',
+    url: 'http://localhost:5001',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },

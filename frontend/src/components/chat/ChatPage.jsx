@@ -51,12 +51,21 @@ const ChatPage = () => {
         // eslint-disable-next-line no-console
         console.log('[CI-DEBUG] ChatPage.fetchData - /api/v1/data response status:', response.status)
         // eslint-disable-next-line no-console
+        console.log('[CI-DEBUG] ChatPage.fetchData - response content-type:', response.headers && response.headers['content-type'])
+        // eslint-disable-next-line no-console
         console.log('[CI-DEBUG] ChatPage.fetchData - data keys:', data && Object.keys(data))
 
+        // Basic guard: ensure server returned JSON
+        const contentType = response.headers && response.headers['content-type']
+        if (!contentType || !contentType.includes('application/json')) {
+          // eslint-disable-next-line no-console
+          console.error('Invalid API response content-type:', contentType, 'body:', typeof data === 'string' ? data.slice(0, 200) : data)
+          throw new Error('API returned non-JSON response')
+        }
 
         if (!data || !Array.isArray(data.channels) || !Array.isArray(data.messages)) {
           // eslint-disable-next-line no-console
-          console.error('Invalid API response:', data)
+          console.error('Invalid API response body:', data)
           return
         }
 

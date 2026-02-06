@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:5001',
     trace: 'on-first-retry',
   },
 
@@ -22,9 +22,9 @@ export default defineConfig({
   webServer: {
     // Start the chat backend (API + socket) via node directly so tests
     // have both static files and API/socket endpoints available.
-    // Avoid executing the package's `start-server` bin directly.
-    command: 'node ./node_modules/@hexlet/chat-server/bin/index.js -s ./frontend/dist',
-    url: 'http://localhost:3000',
+    // Use an explicit port so CI and local runs are deterministic.
+    command: 'node ./node_modules/@hexlet/chat-server/bin/index.js -s ./frontend/dist -p 5001',
+    url: 'http://localhost:5001',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },
