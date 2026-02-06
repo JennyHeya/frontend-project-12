@@ -6,7 +6,10 @@ export const initSocket = (token) => {
   if (socket) return socket
 
   try {
-    socket = io({
+    // Prefer a global `window.io` if present (Playwright tests stub this),
+    // otherwise fall back to the bundled `socket.io-client` import.
+    const ioImpl = (typeof window !== 'undefined' && window.io) ? window.io : io
+    socket = ioImpl({
       transports: ['websocket'],
       auth: { token },
     })
