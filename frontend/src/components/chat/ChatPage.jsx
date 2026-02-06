@@ -135,6 +135,7 @@ const ChatPage = () => {
                             channel.id === currentChannelId ? 'btn-secondary' : 'btn-light'
                           }`}
                           onClick={() => dispatch(setCurrentChannel(channel.id))}
+                          aria-label={channel.name}
                         >
                           <span className="me-1" aria-hidden="true">#</span>
                           {channel.name}
@@ -180,9 +181,9 @@ const ChatPage = () => {
                     </span>
                   </div>
 
-                  <div id="messages-box" className="chat-messages overflow-auto px-5 flex-grow-1">
+                  <div className="p-3 flex-grow-1 overflow-auto">
                     {channelMessages.map((msg) => (
-                      <div key={msg.id} className="text-break mb-2">
+                      <div key={msg.id} className="mb-2">
                         <b>{msg.username}</b>: {msg.body}
                       </div>
                     ))}
