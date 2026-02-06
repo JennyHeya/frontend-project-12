@@ -53,14 +53,20 @@ const SignupPage = () => {
                     onSubmit={async (values, { setSubmitting }) => {
                       setSignupFailed(false)
                       try {
+                        // eslint-disable-next-line no-console
+                        console.log('[CI-DEBUG] SignupPage.onSubmit - POST /api/v1/signup payload:', { username: values.username })
                         const response = await axios.post('/api/v1/signup', {
                           username: values.username,
                           password: values.password,
                         })
+                        // eslint-disable-next-line no-console
+                        console.log('[CI-DEBUG] SignupPage.onSubmit - response status:', response.status, 'data keys:', response.data && Object.keys(response.data))
                         logIn(response.data)
                         navigate('/')
                       } catch (err) {
                         setSubmitting(false)
+                        // eslint-disable-next-line no-console
+                        console.error('[CI-DEBUG] SignupPage.onSubmit - error status:', err.response?.status, 'body:', err.response?.data)
                         if (err.response?.status === 409) {
                           setSignupFailed(true)
                         } else {

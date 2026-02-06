@@ -40,15 +40,28 @@ const ChatPage = () => {
           return
         }
 
-        const { data } = await axios.get('/api/v1/data', {
+        // eslint-disable-next-line no-console
+        console.log('[CI-DEBUG] ChatPage.fetchData - token present:', Boolean(token), 'user:', user?.username)
+
+        const response = await axios.get('/api/v1/data', {
           headers: { Authorization: `Bearer ${token}` },
         })
+        const { data } = response
+
+        // eslint-disable-next-line no-console
+        console.log('[CI-DEBUG] ChatPage.fetchData - /api/v1/data response status:', response.status)
+        // eslint-disable-next-line no-console
+        console.log('[CI-DEBUG] ChatPage.fetchData - data keys:', data && Object.keys(data))
+
 
         if (!data || !Array.isArray(data.channels) || !Array.isArray(data.messages)) {
           // eslint-disable-next-line no-console
           console.error('Invalid API response:', data)
           return
         }
+
+        // eslint-disable-next-line no-console
+        console.log('[CI-DEBUG] ChatPage.fetchData - channels length:', data.channels.length)
 
         dispatch(setChannels({
           channels: data.channels,
