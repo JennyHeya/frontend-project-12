@@ -1,14 +1,16 @@
 ﻿// frontend/src/components/chat/ChatPage.jsx
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import { Button, Dropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
-import leo from 'leo-profanity'
+import leoProfanity from 'leo-profanity'
 import { toast } from 'react-toastify'
 import { useAuth } from '../../contexts/AuthContext.jsx'
-import { useModal } from '../modals/index.jsx'
+import AddChannelModal from '../modals/AddChannelModal.jsx'
+import RemoveChannelModal from '../modals/RemoveChannelModal.jsx'
+import RenameChannelModal from '../modals/RenameChannelModal.jsx'
 import {
   setChannels,
   setCurrentChannel,
@@ -16,103 +18,95 @@ import {
 import {
   setMessages,
   addMessage,
-} from '../../slices/messagesSlice.js'
-import { initSocket, getSocket } from '../../services/socket.js'
+} from '../../slices/messagesSlice.js';
+import { initSocket, getSocket } from '../../services/socket.js';
 
 const ChatPage = () => {
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const { getToken, user } = useAuth()
-  const { showModal } = useModal()
-  const inputRef = useRef(null)
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { getToken, user } = useAuth();
+  const inputRef = useRef(null);
 
-  const { channels, currentChannelId } = useSelector((state) => state.channels)
-  const messages = useSelector((state) => state.messages.messages)
+  // Состояние модалок (если нет контекста)
+  const [modalInfo, setModalInfo] = useState({ type: null, item: null });
+  const showModal = (type, item = null) => setModalInfo({ type, item });
+  const hideModal = () => setModalInfo({ type: null, item: null });
 
-  const currentChannel = (Array.isArray(channels) ? channels : []).find((ch) => ch.id === currentChannelId) || { name: 'general' }
-  const channelMessages = (Array.isArray(messages) ? messages : []).filter((m) => m.channelId === currentChannelId)
+  const { channels = [], currentChannelId } = useSelector((state) => state.channels);
+  const messages = useSelector((state) => state.messages.messages || []);
 
-   useEffect(() => {
+  const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' };
+  const channelMessages = messages.filter((m) => m.channelId === currentChannelId);
+
+  // Загрузка данных + сокет
+  useEffect(() => {
     const fetchData = async () => {
-      try {
-        const userStr = localStorage.getItem('user')
-        if (!userStr) return
-        
-        const userData = JSON.parse(userStr)
-        const token = userData?.token
-        
-        if (!token || typeof token !== 'string' || token.startsWith('<')) {
-          // eslint-disable-next-line no-console
-          console.error('Invalid token stored')
-          return
-        }
+      const token = getToken();
+      if (!token) return;
 
+      try {
         const { data } = await axios.get('/api/v1/data', {
           headers: { Authorization: `Bearer ${token}` },
-        })
-
-        // Валидация ответа
-        if (!data || !Array.isArray(data.channels) || !Array.isArray(data.messages)) {
-          // eslint-disable-next-line no-console
-          console.error('Invalid API response:', data)
-          return
-        }
+        });
 
         dispatch(setChannels({
-          channels: data.channels,
-          currentChannelId: data.currentChannelId,
-        }))
-        dispatch(setMessages(data.messages))
-        
-        // Initialize socket with token after successful data load
-        initSocket(token)
+          channels: data.channels || [],
+          currentChannelId: data.currentChannelId || 1,
+        }));
+        dispatch(setMessages(data.messages || []));
+
+        // Инициализация сокета после успешной загрузки
+        initSocket(token);
       } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error('Error loading chat data:', err.message)
+        console.error('Ошибка загрузки данных:', err);
+        toast.error(t('toasts.networkError'));
       }
-    }
+    };
 
-    fetchData()
-  }, [dispatch])
+    fetchData();
+  }, [dispatch, getToken]);
 
+  // Новые сообщения
   useEffect(() => {
-    const socket = getSocket()
-    if (!socket) return
+    const socket = getSocket();
+    if (!socket) return;
 
     socket.on('newMessage', (payload) => {
-      dispatch(addMessage(payload))
-    })
+      dispatch(addMessage(payload));
+    });
 
-    return () => socket.off('newMessage')
-  }, [dispatch])
+    return () => socket.off('newMessage');
+  }, [dispatch]);
 
-const handleSubmit = async (values, { resetForm }) => {
-    if (!values.body.trim()) return
+  // Отправка сообщения
+  const handleSubmit = async (values, { resetForm }) => {
+    if (!values.body.trim()) return;
 
-    const cleanBody = leo.clean(values.body)
+    const cleanBody = leoProfanity.clean(values.body);
 
     const message = {
       body: cleanBody,
       channelId: currentChannelId,
       username: user.username,
-    }
+    };
 
-    const socket = getSocket()
+    const socket = getSocket();
 
     try {
       await new Promise((resolve, reject) => {
-        const timeout = setTimeout(() => reject(new Error('timeout')), 5000)
+        const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
         socket.emit('newMessage', message, (response) => {
-          clearTimeout(timeout)
-          response.status === 'ok' ? resolve() : reject()
-        })
-      })
-      resetForm()
-      inputRef.current?.focus()
+          clearTimeout(timeout);
+          response.status === 'ok' ? resolve() : reject();
+        });
+      });
+      resetForm();
+      inputRef.current?.focus();
     } catch (err) {
-      toast.error(t('toasts.networkError'))
+      console.error('Сообщение не отправлено:', err);
+      toast.error(t('toasts.networkError'));
     }
-  }
+  };
 
   return (
     <div className="h-100">
@@ -127,7 +121,7 @@ const handleSubmit = async (values, { resetForm }) => {
 
           <div className="container h-100 my-4 overflow-hidden rounded shadow">
             <div className="row h-100 bg-white">
-              {/* === РљРђРќРђР›Р« === */}
+              {/* Каналы */}
               <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
                 <div className="d-flex justify-content-between mb-2 px-4 pe-2">
                   <span>{t('chat.channels')}</span>
@@ -137,7 +131,6 @@ const handleSubmit = async (values, { resetForm }) => {
                     onClick={() => showModal('add')}
                     aria-label={t('chat.addChannel')}
                   >
-                    {/* Visible plus sign for tests and accessibility */}
                     <span className="fs-4">+</span>
                   </button>
                 </div>
@@ -184,7 +177,7 @@ const handleSubmit = async (values, { resetForm }) => {
                 </ul>
               </div>
 
-              {/* === РЎРћРћР‘Р©Р•РќРРЇ === */}
+              {/* Сообщения */}
               <div className="col p-0 h-100">
                 <div className="d-flex flex-column h-100">
                   <div className="bg-light mb-4 p-3 shadow-sm small">
@@ -204,7 +197,7 @@ const handleSubmit = async (values, { resetForm }) => {
                     ))}
                   </div>
 
-                  {/* Р¤РѕСЂРјР° РѕС‚РїСЂР°РІРєРё */}
+                  {/* Форма отправки */}
                   <div className="mt-auto px-5 py-3">
                     <Formik initialValues={{ body: '' }} onSubmit={handleSubmit}>
                       {({ isSubmitting }) => (
@@ -240,9 +233,13 @@ const handleSubmit = async (values, { resetForm }) => {
           </div>
         </div>
       </div>
+
+      {/* Модалки */}
+      {modalInfo.type === 'add' && <AddChannelModal show onHide={hideModal} />}
+      {modalInfo.type === 'remove' && <RemoveChannelModal show onHide={hideModal} channel={modalInfo.item} />}
+      {modalInfo.type === 'rename' && <RenameChannelModal show onHide={hideModal} channel={modalInfo.item} />}
     </div>
-  )
-}
+  );
+};
 
 export default ChatPage
-
