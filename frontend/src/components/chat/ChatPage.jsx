@@ -39,31 +39,32 @@ const ChatPage = () => {
 
   // Загрузка данных + сокет
   useEffect(() => {
-    const fetchData = async () => {
-      const token = getToken();
-      if (!token) return;
+  const token = getToken();
+  if (token) {
+    initSocket(token); // ← вызываем сразу, не ждём fetch
+  }
 
-      try {
-        const { data } = await axios.get('/api/v1/data', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+  const fetchData = async () => {
+    if (!token) return;
 
-        dispatch(setChannels({
-          channels: data.channels || [],
-          currentChannelId: data.currentChannelId || 1,
-        }));
-        dispatch(setMessages(data.messages || []));
+    try {
+      const { data } = await axios.get('/api/v1/data', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-        // Инициализация сокета после успешной загрузки
-        initSocket(token);
-      } catch (err) {
-        console.error('Ошибка загрузки данных:', err);
-        toast.error(t('toasts.networkError'));
-      }
-    };
+      dispatch(setChannels({
+        channels: data.channels || [],
+        currentChannelId: data.currentChannelId || 1,
+      }));
+      dispatch(setMessages(data.messages || []));
+    } catch (err) {
+      console.error('Ошибка загрузки данных:', err);
+      toast.error(t('toasts.networkError'));
+    }
+  };
 
-    fetchData();
-  }, [dispatch, getToken]);
+  fetchData();
+}, [dispatch, getToken]);
 
   // Новые сообщения
   useEffect(() => {
