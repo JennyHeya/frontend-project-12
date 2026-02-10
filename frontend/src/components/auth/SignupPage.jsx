@@ -115,9 +115,9 @@ const SignupPage = () => {
                           )}
                         </div>
 
-                        {signupFailed && (
-                          <div className="text-danger mb-3">{t('signup.errors.userExists')}</div>
-                        )}
+{signupFailed && (
+  <div className="text-danger mb-3">Такой пользователь уже существует</div>
+)}
 
                         <button
                           type="submit"
