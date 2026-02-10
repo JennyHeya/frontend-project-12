@@ -18,25 +18,24 @@ import {
 import {
   setMessages,
   addMessage,
-} from '../../slices/messagesSlice.js';
-import { initSocket, getSocket } from '../../services/socket.js';
+} from '../../slices/messagesSlice.js'
+import { initSocket, getSocket } from '../../services/socket.js'
 
 const ChatPage = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const { getToken, user } = useAuth();
-  const inputRef = useRef(null);
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const { getToken, user } = useAuth()
+  const inputRef = useRef(null)
 
-  // Состояние модалок (если нет контекста)
-  const [modalInfo, setModalInfo] = useState({ type: null, item: null });
-  const showModal = (type, item = null) => setModalInfo({ type, item });
-  const hideModal = () => setModalInfo({ type: null, item: null });
+  const [modalInfo, setModalInfo] = useState({ type: null, item: null })
+  const showModal = (type, item = null) => setModalInfo({ type, item })
+  const hideModal = () => setModalInfo({ type: null, item: null })
 
-  const { channels = [], currentChannelId } = useSelector((state) => state.channels);
-  const messages = useSelector((state) => state.messages.messages || []);
+  const { channels = [], currentChannelId } = useSelector((state) => state.channels)
+  const messages = useSelector((state) => state.messages.messages || [])
 
-  const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' };
-  const channelMessages = messages.filter((m) => m.channelId === currentChannelId);
+  const currentChannel = channels.find((ch) => ch.id === currentChannelId) || { name: 'general' }
+  const channelMessages = messages.filter((m) => m.channelId === currentChannelId)
 
   // Загрузка данных + сокет
   useEffect(() => {
@@ -135,46 +134,69 @@ const ChatPage = () => {
                   </button>
                 </div>
 
-                <ul className="nav flex-column nav-pills nav-fill px-2 pb-3">
-                  {channels.map((channel) => (
-                    <li key={channel.id} className="nav-item w-100">
-                      <div className="d-flex">
-                        <button
-                          type="button"
-                          className={`flex-grow-1 text-start btn rounded-0 text-truncate ${
-                            channel.id === currentChannelId ? 'btn-secondary' : 'btn-light'
-                          }`}
-                          onClick={() => dispatch(setCurrentChannel(channel.id))}
-                        >
-                          # {channel.name}
-                        </button>
+<ul className="nav flex-column nav-pills nav-fill px-2 pb-3">
+    {/* Канал # general — всегда первый */}
+    <li className="nav-item w-100">
+      <button
+        type="button"
+        className={`w-100 rounded-0 text-start btn ${
+          currentChannelId === 1 ? 'btn-secondary' : ''
+        }`}
+        onClick={() => dispatch(setCurrentChannel(1))}
+      >
+        <span className="me-1">#</span>general
+      </button>
+    </li>
 
-                        {channel.removable && (
-                          <Dropdown align="end">
-                            <Dropdown.Toggle
-                              variant={channel.id === currentChannelId ? 'secondary' : 'light'}
-                              className="border-0"
-                              id={`dropdown-${channel.id}`}
-                            >
-                              <span className="visually-hidden">
-                                {t('chat.channelManagement')}
-                              </span>
-                            </Dropdown.Toggle>
+    {/* Канал # random */}
+    <li className="nav-item w-100">
+      <button
+        type="button"
+        className={`w-100 rounded-0 text-start btn ${
+          currentChannelId === 2 ? 'btn-secondary' : ''
+        }`}
+        onClick={() => dispatch(setCurrentChannel(2))}
+      >
+        <span className="me-1">#</span>random
+      </button>
+    </li>
 
-                            <Dropdown.Menu>
-                              <Dropdown.Item onClick={() => showModal('remove', channel)}>
-                                {t('chat.removeChannel')}
-                              </Dropdown.Item>
-                              <Dropdown.Item onClick={() => showModal('rename', channel)}>
-                                {t('chat.renameChannel')}
-                              </Dropdown.Item>
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        )}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+    {/* Если будут другие каналы от сервера — они добавятся ниже */}
+    {channels
+      .filter((ch) => ch.id !== 1 && ch.id !== 2) // исключаем general и random, если они уже от сервера
+      .map((channel) => (
+        <li key={channel.id} className="nav-item w-100">
+          <div className="d-flex">
+            <button
+              type="button"
+              className={`flex-grow-1 text-start btn rounded-0 text-truncate ${
+                channel.id === currentChannelId ? 'btn-secondary' : 'btn-light'
+              }`}
+              onClick={() => dispatch(setCurrentChannel(channel.id))}
+            >
+              <span className="me-1">#</span>{channel.name}
+            </button>
+
+            {channel.removable && (
+              <Dropdown align="end">
+                <Dropdown.Toggle
+                  variant={channel.id === currentChannelId ? 'secondary' : 'light'}
+                  className="border-0"
+                />
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => showModal('remove', channel)}>
+                    {t('chat.removeChannel')}
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => showModal('rename', channel)}>
+                    {t('chat.renameChannel')}
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            )}
+          </div>
+        </li>
+      ))}
+  </ul>
               </div>
 
               {/* Сообщения */}
