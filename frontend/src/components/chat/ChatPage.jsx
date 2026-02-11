@@ -72,6 +72,7 @@ const ChatPage = () => {
     if (!socket) return;
 
     socket.on('newMessage', (payload) => {
+      console.log('Получено новое сообщение:', payload);
       dispatch(addMessage(payload));
     });
 
@@ -89,6 +90,7 @@ const ChatPage = () => {
       channelId: currentChannelId,
       username: user.username,
     };
+    console.log('Отправляем сообщение:', message); // ← лог
 
     const socket = getSocket();
 
@@ -97,6 +99,7 @@ const ChatPage = () => {
         const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
         socket.emit('newMessage', message, (response) => {
           clearTimeout(timeout);
+          console.log('Ответ от сервера:', response); // ← лог
           response.status === 'ok' ? resolve() : reject();
         });
       });
