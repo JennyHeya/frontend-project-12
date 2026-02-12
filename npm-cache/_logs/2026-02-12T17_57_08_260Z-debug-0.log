@@ -1,0 +1,33 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.6.2
+2 info using node@v24.13.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Jenny\Documents\frontend-project-12\.npmrc
+5 silly config load:file:C:\Users\Jenny\.npmrc
+6 silly config load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm run start
+8 verbose argv "run" "start"
+9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T17_57_08_260Z-
+10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T17_57_08_260Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 verbose stack JSONParseError: Invalid package.json: JSONParseError: Expected double-quoted property name in JSON at position 849 (line 19 column 5) while parsing near "...hat-server\\\"\",\r\n    },\r\n    \"dependencie..."
+13 verbose stack     at parse (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\package-json\lib\read-package.js:19:21)
+13 verbose stack     at PackageJson.fromJSON (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\package-json\lib\index.js:162:22)
+13 verbose stack     at PackageJson.load (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\package-json\lib\index.js:157:17)
+13 verbose stack     at async PackageJson.normalize (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\package-json\lib\index.js:117:5)
+13 verbose stack     at async #run (C:\Program Files\nodejs\node_modules\npm\lib\commands\run.js:90:13)
+13 verbose stack     at async RunScript.exec (C:\Program Files\nodejs\node_modules\npm\lib\commands\run.js:44:7)
+13 verbose stack     at async Npm.exec (C:\Program Files\nodejs\node_modules\npm\lib\npm.js:208:9)
+13 verbose stack     at async module.exports (C:\Program Files\nodejs\node_modules\npm\lib\cli\entry.js:67:5)
+14 error code EJSONPARSE
+15 error JSON.parse Invalid package.json: JSONParseError: Expected double-quoted property name in JSON at position 849 (line 19 column 5) while parsing near "...hat-server\\\"\",\r\n    },\r\n    \"dependencie..."
+16 error JSON.parse Failed to parse JSON data.
+16 error JSON.parse Note: package.json must be actual JSON, not just JavaScript.
+17 verbose cwd C:\Users\Jenny\Documents\frontend-project-12
+18 verbose os Windows_NT 10.0.26100
+19 verbose node v24.13.0
+20 verbose npm  v11.6.2
+21 verbose exit 1
+22 verbose code 1
+23 error A complete log of this run can be found in: C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T17_57_08_260Z-debug-0.log

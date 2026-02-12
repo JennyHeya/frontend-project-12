@@ -2,22 +2,22 @@
 1 info using npm@11.6.2
 2 info using node@v24.13.0
 3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
-4 silly config load:file:C:\Users\Jenny\Documents\new_version_12\.npmrc
+4 silly config load:file:C:\Users\Jenny\Documents\frontend-project-12\.npmrc
 5 silly config load:file:C:\Users\Jenny\.npmrc
 6 silly config load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
 7 verbose title npm install
 8 verbose argv "install"
-9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\new_version_12\npm-cache\_logs\2026-02-12T17_20_46_342Z-
-10 verbose logfile C:\Users\Jenny\Documents\new_version_12\npm-cache\_logs\2026-02-12T17_20_46_342Z-debug-0.log
-11 silly logfile done cleaning log files
+9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T17_58_10_455Z-
+10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T17_58_10_455Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
 12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
-13 silly idealTree buildDeps
-14 warn EBADENGINE Unsupported engine {
-14 warn EBADENGINE   package: 'fast-jwt@3.3.3',
-14 warn EBADENGINE   required: { node: '>=16 <22' },
-14 warn EBADENGINE   current: { node: 'v24.13.0', npm: '11.6.2' }
-14 warn EBADENGINE }
-15 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 warn EBADENGINE Unsupported engine {
+15 warn EBADENGINE   package: 'fast-jwt@3.3.3',
+15 warn EBADENGINE   required: { node: '>=16 <22' },
+15 warn EBADENGINE   current: { node: 'v24.13.0', npm: '11.6.2' }
+15 warn EBADENGINE }
 16 silly reify moves {}
 17 silly audit bulk request {
 17 silly audit   '@eslint-community/eslint-utils': [ '4.5.0' ],
@@ -408,7 +408,7 @@
 17 silly audit   'yargs-parser': [ '21.1.1' ],
 17 silly audit   'yocto-queue': [ '0.1.0' ]
 17 silly audit }
-18 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 515ms
+18 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 608ms
 19 silly audit report {
 19 silly audit report   'brace-expansion': [
 19 silly audit report     {
@@ -498,38 +498,38 @@
 22 silly packumentCache corgi:https://registry.npmjs.org/fastify cache-miss
 23 silly packumentCache corgi:https://registry.npmjs.org/js-yaml cache-miss
 24 silly packumentCache corgi:https://registry.npmjs.org/lodash cache-miss
-25 http fetch GET 200 https://registry.npmjs.org/brace-expansion 91ms (cache updated)
-26 silly packumentCache corgi:https://registry.npmjs.org/brace-expansion set size:undefined disposed:false
-27 http fetch GET 200 https://registry.npmjs.org/fastify 212ms (cache revalidated)
+25 http fetch GET 200 https://registry.npmjs.org/fast-jwt 107ms (cache revalidated)
+26 silly packumentCache corgi:https://registry.npmjs.org/fast-jwt set size:103690 disposed:false
+27 http fetch GET 200 https://registry.npmjs.org/fastify 365ms (cache revalidated)
 28 silly packumentCache corgi:https://registry.npmjs.org/fastify set size:727609 disposed:false
-29 http fetch GET 200 https://registry.npmjs.org/js-yaml 222ms (cache revalidated)
+29 http fetch GET 200 https://registry.npmjs.org/js-yaml 372ms (cache revalidated)
 30 silly packumentCache corgi:https://registry.npmjs.org/js-yaml set size:58533 disposed:false
-31 http fetch GET 200 https://registry.npmjs.org/lodash 241ms (cache revalidated)
-32 silly packumentCache corgi:https://registry.npmjs.org/lodash set size:68481 disposed:false
-33 http fetch GET 200 https://registry.npmjs.org/fast-jwt 537ms (cache revalidated)
-34 silly packumentCache corgi:https://registry.npmjs.org/fast-jwt set size:103690 disposed:false
+31 http fetch GET 200 https://registry.npmjs.org/brace-expansion 378ms (cache revalidated)
+32 silly packumentCache corgi:https://registry.npmjs.org/brace-expansion set size:16961 disposed:false
+33 http fetch GET 200 https://registry.npmjs.org/lodash 379ms (cache revalidated)
+34 silly packumentCache corgi:https://registry.npmjs.org/lodash set size:68481 disposed:false
 35 silly packumentCache corgi:https://registry.npmjs.org/minimatch cache-miss
-36 http fetch GET 200 https://registry.npmjs.org/minimatch 76ms (cache revalidated)
+36 http fetch GET 200 https://registry.npmjs.org/minimatch 95ms (cache revalidated)
 37 silly packumentCache corgi:https://registry.npmjs.org/minimatch set size:146096 disposed:false
 38 silly packumentCache corgi:https://registry.npmjs.org/@fastify%2fjwt cache-miss
-39 http fetch GET 200 https://registry.npmjs.org/@fastify%2fjwt 858ms (cache revalidated)
+39 http fetch GET 200 https://registry.npmjs.org/@fastify%2fjwt 122ms (cache revalidated)
 40 silly packumentCache corgi:https://registry.npmjs.org/@fastify%2fjwt set size:42552 disposed:false
 41 silly packumentCache corgi:https://registry.npmjs.org/@hexlet%2fchat-server cache-miss
 42 silly packumentCache corgi:https://registry.npmjs.org/fastify-cli cache-miss
-43 http fetch GET 200 https://registry.npmjs.org/fastify-cli 308ms (cache revalidated)
+43 http fetch GET 200 https://registry.npmjs.org/fastify-cli 116ms (cache revalidated)
 44 silly packumentCache corgi:https://registry.npmjs.org/fastify-cli set size:204286 disposed:false
-45 http fetch GET 200 https://registry.npmjs.org/@hexlet%2fchat-server 541ms (cache revalidated)
+45 http fetch GET 200 https://registry.npmjs.org/@hexlet%2fchat-server 830ms (cache revalidated)
 46 silly packumentCache corgi:https://registry.npmjs.org/@hexlet%2fchat-server set size:25078 disposed:false
 47 silly packumentCache corgi:https://registry.npmjs.org/@eslint%2feslintrc cache-miss
 48 silly packumentCache corgi:https://registry.npmjs.org/eslint cache-miss
-49 http fetch GET 200 https://registry.npmjs.org/eslint 74ms (cache revalidated)
+49 http fetch GET 200 https://registry.npmjs.org/eslint 102ms (cache revalidated)
 50 silly packumentCache corgi:https://registry.npmjs.org/eslint set size:1126678 disposed:false
-51 http fetch GET 200 https://registry.npmjs.org/@eslint%2feslintrc 320ms (cache revalidated)
+51 http fetch GET 200 https://registry.npmjs.org/@eslint%2feslintrc 125ms (cache revalidated)
 52 silly packumentCache corgi:https://registry.npmjs.org/@eslint%2feslintrc set size:80753 disposed:false
 53 silly packumentCache corgi:https://registry.npmjs.org/concurrently cache-miss
-54 http fetch GET 200 https://registry.npmjs.org/concurrently 77ms (cache revalidated)
+54 http fetch GET 200 https://registry.npmjs.org/concurrently 94ms (cache revalidated)
 55 silly packumentCache corgi:https://registry.npmjs.org/concurrently set size:102723 disposed:false
-56 verbose cwd C:\Users\Jenny\Documents\new_version_12
+56 verbose cwd C:\Users\Jenny\Documents\frontend-project-12
 57 verbose os Windows_NT 10.0.26100
 58 verbose node v24.13.0
 59 verbose npm  v11.6.2
