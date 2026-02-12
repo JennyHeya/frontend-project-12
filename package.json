@@ -20,5 +20,8 @@
     "dependencies": {
         "@hexlet/chat-server": "^2.0.4",
         "concurrently": "^9.1.2"
-    }
+    },
+    "resolutions": {
+  "fast-uri": "^3.0.3"
+}
 }
