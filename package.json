@@ -19,9 +19,9 @@
     },
     "dependencies": {
         "@hexlet/chat-server": "^2.0.4",
-        "concurrently": "^9.1.2"
+        "concurrently": "^9.2.1"
     },
-    "resolutions": {
-        "fast-uri": "^3.0.3"
-    }
+"overrides": {
+  "fast-uri": "^3.0.3"
+}
 }

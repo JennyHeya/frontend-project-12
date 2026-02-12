@@ -1,0 +1,96 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.6.2
+2 info using node@v24.13.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Jenny\Documents\frontend-project-12\.npmrc
+5 silly config load:file:C:\Users\Jenny\.npmrc
+6 silly config load:file:C:\Users\Jenny\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install"
+9 verbose logfile logs-max:10 dir:C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T18_19_15_289Z-
+10 verbose logfile C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T18_19_15_289Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest @stylistic/eslint-plugin-js@^4.4.1
+16 silly packumentCache full:https://registry.npmjs.org/@stylistic%2feslint-plugin-js cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/@stylistic%2feslint-plugin-js 446ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/@stylistic%2feslint-plugin-js set size:undefined disposed:false
+19 silly fetch manifest eslint@^9.39.1
+20 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+21 http cache https://registry.npmjs.org/eslint 9ms (cache hit)
+22 silly packumentCache full:https://registry.npmjs.org/eslint set size:1929113 disposed:false
+23 silly fetch manifest jiti@*
+24 silly packumentCache full:https://registry.npmjs.org/jiti cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/jiti 173ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/jiti set size:undefined disposed:false
+27 silly fetch manifest concurrently@^9.2.1
+28 silly packumentCache full:https://registry.npmjs.org/concurrently cache-miss
+29 http cache https://registry.npmjs.org/concurrently 7ms (cache hit)
+30 silly packumentCache full:https://registry.npmjs.org/concurrently set size:203555 disposed:false
+31 silly fetch manifest eslint-config-prettier@^10.1.8
+32 silly packumentCache full:https://registry.npmjs.org/eslint-config-prettier cache-miss
+33 http fetch GET 200 https://registry.npmjs.org/eslint-config-prettier 127ms (cache miss)
+34 silly packumentCache full:https://registry.npmjs.org/eslint-config-prettier set size:undefined disposed:false
+35 silly fetch manifest eslint-plugin-react@^7.37.5
+36 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-react cache-miss
+37 http fetch GET 200 https://registry.npmjs.org/eslint-plugin-react 115ms (cache miss)
+38 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-react set size:undefined disposed:false
+39 silly fetch manifest eslint-plugin-react-hooks@^7.0.1
+40 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-react-hooks cache-miss
+41 http fetch GET 200 https://registry.npmjs.org/eslint-plugin-react-hooks 292ms (cache miss)
+42 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-react-hooks set size:undefined disposed:false
+43 silly fetch manifest prettier@^3.7.4
+44 silly packumentCache full:https://registry.npmjs.org/prettier cache-miss
+45 http cache https://registry.npmjs.org/prettier 5ms (cache hit)
+46 silly packumentCache full:https://registry.npmjs.org/prettier set size:653745 disposed:false
+47 verbose stack Error: could not resolve
+47 verbose stack     at PlaceDep.failPeerConflict (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\place-dep.js:503:25)
+47 verbose stack     at new PlaceDep (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\place-dep.js:157:21)
+47 verbose stack     at #buildDepStep (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:945:18)
+47 verbose stack     at async Arborist.buildIdealTree (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:182:7)
+47 verbose stack     at async Promise.all (index 1)
+47 verbose stack     at async Arborist.reify (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:114:5)
+47 verbose stack     at async Install.exec (C:\Program Files\nodejs\node_modules\npm\lib\commands\install.js:150:5)
+47 verbose stack     at async Npm.exec (C:\Program Files\nodejs\node_modules\npm\lib\npm.js:208:9)
+47 verbose stack     at async module.exports (C:\Program Files\nodejs\node_modules\npm\lib\cli\entry.js:67:5)
+48 error code ERESOLVE
+49 error ERESOLVE could not resolve
+50 error
+51 error While resolving: @hexlet/code@1.0.0
+51 error Found: eslint@8.57.1[2m[22m
+51 error [2mnode_modules/eslint[22m
+51 error   [34mdev[39m eslint@"^9.39.1" from the root project
+51 error   [95mpeer[39m eslint@"^6.0.0 || ^7.0.0 || >=8.0.0" from @eslint-community/eslint-utils@4.5.0[2m[22m
+51 error   [2mnode_modules/@eslint-community/eslint-utils[22m
+51 error     @eslint-community/eslint-utils@"^4.2.0" from eslint@8.57.1
+51 error   6 more (eslint-config-airbnb, eslint-config-airbnb-base, ...)
+51 error
+51 error Could not resolve dependency:
+51 error [34mdev[39m @stylistic/eslint-plugin-js@"^4.4.1" from the root project
+51 error
+51 error Conflicting peer dependency: eslint@9.39.2[2m[22m
+51 error [2mnode_modules/eslint[22m
+51 error   [95mpeer[39m eslint@">=9.0.0" from @stylistic/eslint-plugin-js@4.4.1[2m[22m
+51 error   [2mnode_modules/@stylistic/eslint-plugin-js[22m
+51 error     [34mdev[39m @stylistic/eslint-plugin-js@"^4.4.1" from the root project
+51 error
+51 error Fix the upstream dependency conflict, or retry
+51 error this command with --force or --legacy-peer-deps
+51 error to accept an incorrect (and potentially broken) dependency resolution.
+52 error
+52 error
+52 error For a full report see:
+52 error C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T18_19_15_289Z-eresolve-report.txt
+53 silly unfinished npm timer reify 1770920355490
+54 silly unfinished npm timer reify:loadTrees 1770920355491
+55 silly unfinished npm timer idealTree:buildDeps 1770920355598
+56 silly unfinished npm timer idealTree:#root 1770920355598
+57 verbose cwd C:\Users\Jenny\Documents\frontend-project-12
+58 verbose os Windows_NT 10.0.26100
+59 verbose node v24.13.0
+60 verbose npm  v11.6.2
+61 verbose exit 1
+62 verbose code 1
+63 error A complete log of this run can be found in: C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T18_19_15_289Z-debug-0.log
