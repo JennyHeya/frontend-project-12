@@ -1,0 +1,11 @@
+.message-svg {
+  position: absolute;
+  left: 20px;
+  fill: #6c757d;
+  cursor: pointer;
+  z-index: 10;
+
+  &:hover {
+    fill: #0d6efd;
+  }
+}

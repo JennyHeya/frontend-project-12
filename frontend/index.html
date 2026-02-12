@@ -2,12 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />    
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />    
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />    
+    <link rel="manifest" href="/manifest.webmanifest" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hexlet Chat</title>
+
+      <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="vh-100 bg-light" >
+    <div id="root" class="h-100 d-flex flex-column"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

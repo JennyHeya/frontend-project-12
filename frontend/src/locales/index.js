@@ -1,10 +1,5 @@
-﻿import translation from './ru/translation.json'
+import ru from './ru.js'
 
-const resources = {
-  ru: {
-    translation,
-  },
+export default {
+  ru,
 }
-
-export default resources
-
