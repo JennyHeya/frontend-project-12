@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import filter from 'leo-profanity'
 import { Button, Form, Modal } from 'react-bootstrap'
 
-import { useRenameChannelMutation } from '../../slices/channelsSlice'
+import { useRenameChannelMutation } from '../../store/slices/channelsSlice'
 import toastPromise from '../../utils/toastPromise'
 
 const ModalRenameChannel = ({

@@ -7,7 +7,7 @@ import filter from 'leo-profanity'
 
 import { Button, Form, Modal } from 'react-bootstrap'
 
-import { changeActiveChannel, useAddChannelMutation } from '../../slices/channelsSlice'
+import { changeActiveChannel, useAddChannelMutation } from '../../store/slices/channelsSlice'
 
 import toastPromise from '../../utils/toastPromise'
 

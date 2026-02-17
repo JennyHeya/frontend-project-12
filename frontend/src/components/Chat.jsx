@@ -7,10 +7,10 @@ import Messages from './chatComponents/Messages'
 import MessageForm from './chatComponents/MessageForm'
 import '../css/chatpage.css'
 
-import { useGetMessagesQuery } from '../slices/messagesSlice'
-import { useGetChannelsQuery } from '../slices/channelsSlice'
+import { useGetMessagesQuery } from '../store/slices/messagesSlice'
+import { useGetChannelsQuery } from '../store/slices/channelsSlice'
 
-import { setOpen } from '../slices/modalSlice'
+import { setOpen } from '../store/slices/modalSlice'
 
 const Chat = () => {
   const dispatch = useDispatch()

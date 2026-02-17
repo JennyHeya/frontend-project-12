@@ -4,9 +4,9 @@ import ModalRemoveChannel from './modalComponents/ModalRemoveChannel'
 import ModalRenameChannel from './modalComponents/ModalRenameChannel'
 import ModalAddChannel from './modalComponents/ModalAddChannel'
 
-import { useGetChannelsQuery } from '../slices/channelsSlice'
+import { useGetChannelsQuery } from '../store/slices/channelsSlice'
 
-import { setClose } from '../slices/modalSlice'
+import { setClose } from '../store/slices/modalSlice'
 
 const types = {
   removeChannel: ModalRemoveChannel,

@@ -6,7 +6,7 @@ import filter from 'leo-profanity'
 import EmojiPicker from 'emoji-picker-react'
 
 import { useAuth, useUiContext } from '../../hooks'
-import { useSendMessageMutation } from '../../slices/messagesSlice'
+import { useSendMessageMutation } from '../../store/slices/messagesSlice'
 
 import Smile from '../svg/Smile'
 import Arrow from '../svg/Arrow'

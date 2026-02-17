@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-import { changeActiveChannel } from '../../slices/channelsSlice'
+import { changeActiveChannel } from '../../store/slices/channelsSlice'
 import { useUiContext } from '../../hooks'
 import Cross from '../svg/Cross'
 
