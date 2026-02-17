@@ -16,8 +16,5 @@
     },
     "dependencies": {
         "@hexlet/chat-server": "^2.0.4"
-    },
-    "overrides": {
-        "fast-uri": "^3.0.3"
- }
+    } 
 }
