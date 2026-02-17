@@ -1,0 +1,74 @@
+'Log files:
+C:\Users\Jenny\Documents\frontend-project-12\npm-cache\_logs\2026-02-12T18_19_15_289Z-debug-0.log
+
+# npm resolution error report
+
+While resolving: @hexlet/code@1.0.0
+Found: eslint@8.57.1
+node_modules/eslint
+  dev eslint@"^9.39.1" from the root project
+  peer eslint@"^6.0.0 || ^7.0.0 || >=8.0.0" from @eslint-community/eslint-utils@4.5.0
+  node_modules/@eslint-community/eslint-utils
+    @eslint-community/eslint-utils@"^4.2.0" from eslint@8.57.1
+  peer eslint@"^7.32.0 || ^8.2.0" from eslint-config-airbnb@19.0.4
+  node_modules/eslint-config-airbnb
+    eslint-config-airbnb@"^19.0.4" from @hexlet/chat-server@2.0.4
+    node_modules/@hexlet/chat-server
+      @hexlet/chat-server@"^2.0.4" from the root project
+  peer eslint@"^7.32.0 || ^8.2.0" from eslint-config-airbnb-base@15.0.0
+  node_modules/eslint-config-airbnb-base
+    eslint-config-airbnb-base@"^15.0.0" from eslint-config-airbnb@19.0.4
+    node_modules/eslint-config-airbnb
+      eslint-config-airbnb@"^19.0.4" from @hexlet/chat-server@2.0.4
+      node_modules/@hexlet/chat-server
+        @hexlet/chat-server@"^2.0.4" from the root project
+  peer eslint@"^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8 || ^9" from eslint-plugin-import@2.31.0
+  node_modules/eslint-plugin-import
+    peer eslint-plugin-import@"^2.25.3" from eslint-config-airbnb@19.0.4
+    node_modules/eslint-config-airbnb
+      eslint-config-airbnb@"^19.0.4" from @hexlet/chat-server@2.0.4
+      node_modules/@hexlet/chat-server
+        @hexlet/chat-server@"^2.0.4" from the root project
+    peer eslint-plugin-import@"^2.25.2" from eslint-config-airbnb-base@15.0.0
+    node_modules/eslint-config-airbnb-base
+      eslint-config-airbnb-base@"^15.0.0" from eslint-config-airbnb@19.0.4
+      node_modules/eslint-config-airbnb
+        eslint-config-airbnb@"^19.0.4" from @hexlet/chat-server@2.0.4
+        node_modules/@hexlet/chat-server
+          @hexlet/chat-server@"^2.0.4" from the root project
+  peer eslint@"^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9" from eslint-plugin-jsx-a11y@6.10.2
+  node_modules/eslint-plugin-jsx-a11y
+    peer eslint-plugin-jsx-a11y@"^6.5.1" from eslint-config-airbnb@19.0.4
+    node_modules/eslint-config-airbnb
+      eslint-config-airbnb@"^19.0.4" from @hexlet/chat-server@2.0.4
+      node_modules/@hexlet/chat-server
+        @hexlet/chat-server@"^2.0.4" from the root project
+  peer eslint@"^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7" from eslint-plugin-react@7.37.4
+  node_modules/eslint-plugin-react
+    dev eslint-plugin-react@"^7.37.5" from the root project
+    peer eslint-plugin-react@"^7.28.0" from eslint-config-airbnb@19.0.4
+    node_modules/eslint-config-airbnb
+      eslint-config-airbnb@"^19.0.4" from @hexlet/chat-server@2.0.4
+      node_modules/@hexlet/chat-server
+        @hexlet/chat-server@"^2.0.4" from the root project
+  peer eslint@"^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0" from eslint-plugin-react-hooks@4.6.2
+  node_modules/eslint-plugin-react-hooks
+    dev eslint-plugin-react-hooks@"^7.0.1" from the root project
+    peer eslint-plugin-react-hooks@"^4.3.0" from eslint-config-airbnb@19.0.4
+    node_modules/eslint-config-airbnb
+      eslint-config-airbnb@"^19.0.4" from @hexlet/chat-server@2.0.4
+      node_modules/@hexlet/chat-server
+        @hexlet/chat-server@"^2.0.4" from the root project
+
+Could not resolve dependency:
+dev @stylistic/eslint-plugin-js@"^4.4.1" from the root project
+
+Conflicting peer dependency: eslint@9.39.2
+node_modules/eslint
+  peer eslint@">=9.0.0" from @stylistic/eslint-plugin-js@4.4.1
+  node_modules/@stylistic/eslint-plugin-js
+    dev @stylistic/eslint-plugin-js@"^4.4.1" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.
