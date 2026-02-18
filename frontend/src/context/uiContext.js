@@ -1,5 +1,3 @@
 import { createContext } from 'react'
 
-const UiContext = createContext({})
-
-export default UiContext
+export const UiContext = createContext({})
