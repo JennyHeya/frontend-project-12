@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import filter from 'leo-profanity'
 
@@ -10,6 +9,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import { changeActiveChannel, useAddChannelMutation } from '../../store/slices/channelsSlice'
 
 import toastPromise from '../../utils/toastPromise'
+import { channelNameSchema } from '../../utils/validationSchemas'
 
 const ModalAddChannel = ({ channels, show, handleClose }) => {
   const dispatch = useDispatch()
@@ -28,24 +28,11 @@ const ModalAddChannel = ({ channels, show, handleClose }) => {
     }
   }, [show])
 
-  const schema = yup.object({
-    name: yup
-      .string()
-      .min(3, t('validation.channelsValidation.length'))
-      .max(20, t('validation.channelsValidation.length'))
-      .required(t('validation.required'))
-      .test(
-        'is name uniq',
-        t('validation.channelsValidation.duplicate'),
-        val => !channels.some(({ name }) => name === val),
-      ),
-  })
-
   const formik = useFormik({
     initialValues: {
       name: '',
     },
-    validationSchema: schema,
+    validationSchema: channelNameSchema,
     validateOnChange: true,
     onSubmit: async (values) => {
       const name = filter.clean(values.name)

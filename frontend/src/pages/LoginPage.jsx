@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
@@ -10,6 +9,7 @@ import { userRoutes, pagesRoutes } from '../api/routes'
 import api from '../api/requests'
 
 import Login from '../components/Login'
+import { loginSchema } from '../utils/validationSchemas'
 
 const LoginPage = () => {
   const [isAuthFailed, setIsAuthFailed] = useState(false)
@@ -18,17 +18,12 @@ const LoginPage = () => {
 
   const { t } = useTranslation()
 
-  const schema = yup.object({
-    username: yup.string().required(t('validation.required')),
-    password: yup.string().required(t('validation.required')),
-  })
-
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
-    validationSchema: schema,
+    validationSchema: loginSchema,
     validateOnChange: true,
     onSubmit: async (values) => {
       setIsAuthFailed(false)

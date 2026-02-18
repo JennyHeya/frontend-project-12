@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
@@ -9,36 +8,21 @@ import { userRoutes, pagesRoutes } from '../api/routes'
 import api from '../api/requests'
 
 import Signup from '../components/Signup'
+import { signupSchema } from '../utils/validationSchemas'
 
 const SignupPage = () => {
   const navigate = useNavigate()
   const auth = useAuth()
 
   const { t } = useTranslation()
-
-  const schema = yup.object({
-    username: yup
-      .string()
-      .min(3, t('validation.signup.nameLength'))
-      .max(20, t('validation.signup.nameLength'))
-      .required(t('validation.required')),
-    password: yup
-      .string()
-      .min(6, t('validation.signup.passwordLength'))
-      .required(t('validation.required')),
-    confirmPassword: yup
-      .string()
-      .required(t('validation.required'))
-      .min(6, t('validation.signup.passwordLength'))
-      .oneOf([yup.ref('password')], t('validation.signup.notConfirmPassword')),
-  })
+  
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
       confirmPassword: '',
     },
-    validationSchema: schema,
+    validationSchema: signupSchema,
     validateOnChange: true,
     onSubmit: async (values) => {
       auth.updateAuthError(null)
