@@ -1,4 +1,2 @@
-import AuthContext from './authContext'
-import UiContext from './uiContext'
-
-export { AuthContext, UiContext }
+export { AuthContext, AuthProvider } from './authContext'
+export { UiContext, UiProvider } from './uiContext'
