@@ -15,7 +15,7 @@ const SignupPage = () => {
   const auth = useAuth()
 
   const { t } = useTranslation()
-  
+
   const formik = useFormik({
     initialValues: {
       username: '',

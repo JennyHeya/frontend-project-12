@@ -29,7 +29,7 @@ const ModalRenameChannel = ({
     }
   }, [show])
 
-   const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       name: currentChannel,
     },

@@ -11,7 +11,7 @@ import { changeActiveChannel, useAddChannelMutation } from '../../store/slices/c
 import toastPromise from '../../utils/toastPromise'
 import { channelNameSchema } from '../../utils/validationSchemas'
 
-const ModalAddChannel = ({ channels, show, handleClose }) => {
+const ModalAddChannel = ({ show, handleClose }) => {
   const dispatch = useDispatch()
   const [addChannel] = useAddChannelMutation()
   const { t } = useTranslation()
