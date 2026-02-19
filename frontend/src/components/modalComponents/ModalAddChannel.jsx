@@ -45,7 +45,7 @@ const ModalAddChannel = ({ show, handleClose }) => {
         toastPromise,
         message,
         handleClose,
-        filter
+        filter,
       ),
   })
 

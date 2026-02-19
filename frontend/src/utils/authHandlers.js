@@ -26,7 +26,7 @@ export const handleSignupSubmit = async (values, actions, auth, navigate, t, toa
   }
 }
 
-export const handleLoginSubmit = async (values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes) => {
+export const handleLoginSubmit = async (values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes, setIsAuthFailed) => {
   auth.updateAuthError(null)
   try {
     const res = await api('post', userRoutes.loginPath(), values)

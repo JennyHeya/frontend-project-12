@@ -27,7 +27,7 @@ const LoginPage = () => {
     validationSchema: loginSchema,
     validateOnChange: true,
     onSubmit: (values, actions) =>
-      handleLoginSubmit(values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes, setIsAuthFailed),
+      handleLoginSubmit(values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes, setIsAuthFailed, setIsAuthFailed),
   })
 
   return <Login props={{ isAuthFailed, formik, err: auth.authError }} />

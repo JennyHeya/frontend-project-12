@@ -36,7 +36,7 @@ const ModalRenameChannel = ({
     },
     validationSchema: channelNameSchema,
     validateOnChange: true,
-    onSubmit:(values, actions) =>
+    onSubmit: (values, actions) =>
       handleRenameChannelSubmit(
         values,
         actions,
@@ -45,7 +45,7 @@ const ModalRenameChannel = ({
         toastPromise,
         message,
         handleClose,
-        filter
+        filter,
       ),
   })
 

@@ -7,7 +7,7 @@ export const handleAddChannelSubmit = async (
   toastPromise,
   message,
   handleClose,
-  filter
+  filter,
 ) => {
   const name = filter.clean(values.name)
   const response = addChannel({ name })
@@ -27,7 +27,7 @@ export const handleRenameChannelSubmit = async (
   toastPromise,
   message,
   handleClose,
-  filter
+  filter,
 ) => {
   const name = filter.clean(values.name)
   const response = renameChannel({ name, id }).unwrap()
