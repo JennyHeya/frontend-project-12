@@ -10,6 +10,7 @@ import { changeActiveChannel, useAddChannelMutation } from '../../store/slices/c
 
 import toastPromise from '../../utils/toastPromise'
 import { channelNameSchema } from '../../utils/validationSchemas'
+import { handleAddChannelSubmit } from '../../utils/channelHandlers'
 
 const ModalAddChannel = ({ show, handleClose }) => {
   const dispatch = useDispatch()
@@ -34,14 +35,18 @@ const ModalAddChannel = ({ show, handleClose }) => {
     },
     validationSchema: channelNameSchema,
     validateOnChange: true,
-    onSubmit: async (values) => {
-      const name = filter.clean(values.name)
-      const response = addChannel({ name })
-        .unwrap()
-        .then(({ id }) => dispatch(changeActiveChannel(id)))
-      toastPromise(response, message)
-      handleClose()
-    },
+    onSubmit: (values, actions) =>
+      handleAddChannelSubmit(
+        values,
+        actions,
+        addChannel,
+        dispatch,
+        changeActiveChannel,
+        toastPromise,
+        message,
+        handleClose,
+        filter
+      ),
   })
 
   const inputClasses = formik.touched.name && formik.errors.name

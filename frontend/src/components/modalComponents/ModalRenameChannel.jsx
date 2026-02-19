@@ -7,6 +7,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import { useRenameChannelMutation } from '../../store/slices/channelsSlice'
 import toastPromise from '../../utils/toastPromise'
 import { channelNameSchema } from '../../utils/validationSchemas'
+import { handleRenameChannelSubmit } from '../../utils/channelHandlers'
 
 const ModalRenameChannel = ({
   channels, show, handleClose, id,
@@ -35,13 +36,17 @@ const ModalRenameChannel = ({
     },
     validationSchema: channelNameSchema,
     validateOnChange: true,
-    onSubmit: async (values) => {
-      const name = filter.clean(values.name)
-      const response = renameChannel({ name, id }).unwrap()
-      toastPromise(response, message)
-
-      handleClose()
-    },
+    onSubmit:(values, actions) =>
+      handleRenameChannelSubmit(
+        values,
+        actions,
+        renameChannel,
+        id,
+        toastPromise,
+        message,
+        handleClose,
+        filter
+      ),
   })
 
   const inputClasses = formik.touched.name && formik.errors.name
