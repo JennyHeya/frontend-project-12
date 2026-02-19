@@ -8,8 +8,8 @@ import EmojiPicker from 'emoji-picker-react'
 import { useAuth, useUiContext } from '../../hooks'
 import { useSendMessageMutation } from '../../store/slices/messagesSlice'
 
-import Smile from '../svg/Smile'
-import Arrow from '../svg/Arrow'
+import Smile from '../../assets/svg/Smile'
+import Arrow from '../../assets/svg/Arrow'
 
 const MessageForm = ({ activeChannelId }) => {
   const { t } = useTranslation()

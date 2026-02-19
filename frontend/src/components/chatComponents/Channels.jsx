@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { changeActiveChannel } from '../../store/slices/channelsSlice'
 import { useUiContext } from '../../hooks'
-import Cross from '../svg/Cross'
+import Cross from '../../assets/svg/Cross'
 
 const Channels = ({ channels, handleModal }) => {
   const { t } = useTranslation()
