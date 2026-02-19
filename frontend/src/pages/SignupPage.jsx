@@ -25,8 +25,8 @@ const SignupPage = () => {
     },
     validationSchema: signupSchema,
     validateOnChange: true,
-  onSubmit: (values, actions) =>
-    handleSignupSubmit(values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes),
+    onSubmit: (values, actions) =>
+      handleSignupSubmit(values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes),
   })
 
   return (

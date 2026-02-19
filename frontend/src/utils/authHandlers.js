@@ -9,7 +9,8 @@ export const handleSignupSubmit = async (values, formikActions, auth, navigate, 
     auth.addUser({ username })
     navigate(pagesRoutes.chat())
     toast.success(t('signup.success'))
-  } catch (err) {
+  }
+  catch (err) {
     const authError = err.status ?? err.code
     auth.updateAuthError(authError)
 
@@ -19,7 +20,8 @@ export const handleSignupSubmit = async (values, formikActions, auth, navigate, 
     }
 
     toast.error(t([`errors.${authError}`, 'errors.default']))
-  } finally {
+  }
+  finally {
     formikActions.setSubmitting(false)
   }
 }
