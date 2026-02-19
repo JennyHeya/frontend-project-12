@@ -9,6 +9,7 @@ import api from '../api/requests'
 
 import Signup from '../components/Signup'
 import { signupSchema } from '../utils/validationSchemas'
+import { handleSignupSubmit } from '../utils/authHandlers'
 
 const SignupPage = () => {
   const navigate = useNavigate()
@@ -24,23 +25,8 @@ const SignupPage = () => {
     },
     validationSchema: signupSchema,
     validateOnChange: true,
-    onSubmit: async (values) => {
-      auth.updateAuthError(null)
-      try {
-        const res = await api('post', userRoutes.signupPath(), values)
-        localStorage.setItem('userId', JSON.stringify(res.data))
-        const { username } = values
-        auth.logIn()
-        auth.addUser({ username })
-        navigate(`${pagesRoutes.chat()}`)
-      }
-      catch (err) {
-        const authError = err.status ?? err.code
-        auth.updateAuthError(authError)
-        if (authError === 409) return
-        toast.error(t([`errors.${authError}`, 'errors.default']))
-      }
-    },
+  onSubmit: (values, actions) =>
+    handleSignupSubmit(values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes),
   })
 
   return (
