@@ -10,6 +10,7 @@ import api from '../api/requests'
 
 import Login from '../components/Login'
 import { loginSchema } from '../utils/validationSchemas'
+import { handleLoginSubmit } from '../utils/authHandlers'
 
 const LoginPage = () => {
   const [isAuthFailed, setIsAuthFailed] = useState(false)
@@ -25,25 +26,8 @@ const LoginPage = () => {
     },
     validationSchema: loginSchema,
     validateOnChange: true,
-    onSubmit: async (values) => {
-      setIsAuthFailed(false)
-      auth.updateAuthError(null)
-      try {
-        const res = await api('post', userRoutes.loginPath(), values)
-        const { username } = values
-        localStorage.setItem('userId', JSON.stringify({ ...res.data, username }))
-        auth.logIn()
-        auth.addUser({ username })
-        navigate(`${pagesRoutes.chat()}`)
-      }
-      catch (err) {
-        setIsAuthFailed(true)
-        const authError = err.status ?? err.code
-        auth.updateAuthError(authError)
-        if (authError === 401) return
-        toast.error(t([`errors.${authError}`, 'errors.default']))
-      }
-    },
+    onSubmit: (values, actions) =>
+      handleLoginSubmit(values, actions, auth, navigate, t, toast, api, userRoutes, pagesRoutes, setIsAuthFailed),
   })
 
   return <Login props={{ isAuthFailed, formik, err: auth.authError }} />
