@@ -15,15 +15,16 @@ const Channels = ({ channels, handleModal, activeChannelId }) => {
 
   const channelName = (id, name) => (
     <Button
-      variant={id === activeChannelId ? "secondary" : "light"}
+      variant={id === activeChannelId ? 'secondary' : 'light'}
       type="button"
-      className={`w-100 rounded-0 text-start btn text-truncate ${id === activeChannelId ? "btn-secondary" : "btn-light"}`}
+      className={`w-100 rounded-0 text-start btn text-truncate ${id === activeChannelId ? 'btn-secondary' : 'btn-light'}`}
       onClick={() => {
         dispatch(changeActiveChannel(id))
         inputRef.setFocus()
       }}
     >
-      # {name}
+      # 
+      {name}
     </Button>
   )
 

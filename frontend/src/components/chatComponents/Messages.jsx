@@ -7,7 +7,7 @@ const Messages = ({ messages, activeChannelId, channels }) => {
 
   useEffect(() => {
     messagesRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, 
+  },
   [messages, activeChannelId])
 
   const renderMessages = (id) => {
