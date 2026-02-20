@@ -27,20 +27,21 @@ const Chat = () => {
       <Row className="h-100 bg-white flex-md-row">
         <Col
           col={12}
-          md={4}
-          className="border-end px-0 bg-light flex-column d-flex"
+          md={3}
+          className="border-end px-0 bg-light flex-column d-flex overflow-hidden"
         >
           <Channels
             channels={channels}
             handleModal={handleModal}
+            activeChannelId={activeChannelId}
           />
         </Col>
         <Col
           col={12}
-          md={8}
-          className="p-0"
+          md={9}
+          className="p-0 overflow-hidden"
         >
-          <div className="d-flex flex-column h-100">
+          <div className="d-flex flex-column h-100 overflow-auto" id="messages-box">
             <Messages
               messages={messages}
               channels={channels}

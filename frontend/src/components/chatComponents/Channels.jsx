@@ -8,25 +8,22 @@ import { changeActiveChannel } from '../../store/slices/channelsSlice'
 import { useUiContext } from '../../hooks'
 import Cross from '../../assets/svg/Cross'
 
-const Channels = ({ channels, handleModal }) => {
+const Channels = ({ channels, handleModal, activeChannelId }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const inputRef = useUiContext()
 
   const channelName = (id, name) => (
     <Button
-      variant="secondary"
+      variant={id === activeChannelId ? "secondary" : "light"}
       type="button"
-      className="w-100 rounded-0 text-start btn btn-secondary text-truncate"
+      className={`w-100 rounded-0 text-start btn text-truncate ${id === activeChannelId ? "btn-secondary" : "btn-light"}`}
       onClick={() => {
         dispatch(changeActiveChannel(id))
         inputRef.setFocus()
       }}
     >
-      {' '}
-      #
-      {' '}
-      {name}
+      # {name}
     </Button>
   )
 
@@ -78,7 +75,7 @@ const Channels = ({ channels, handleModal }) => {
           <span className="visually-hidden">+</span>
         </Button>
       </div>
-      <ListGroup as="ul" id="channels-box" className="p-2">
+      <ListGroup as="ul" id="channels-box" className="p-2 channels-list">
         {renderListGroup()}
       </ListGroup>
     </>
