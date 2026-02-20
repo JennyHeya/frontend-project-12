@@ -38,7 +38,7 @@ const Login = ({ props }) => {
                         : ''
                     }
                     name="username"
-                    autoComplete="username"
+                    autoComplete="off"
                     required=""
                     placeholder={t('forms.authName')}
                     onChange={formik.handleChange}
@@ -64,7 +64,7 @@ const Login = ({ props }) => {
                         : ''
                     }
                     name="password"
-                    autoComplete="current-password"
+                    autoComplete="off"
                     required=""
                     placeholder={t('forms.password')}
                     onChange={formik.handleChange}

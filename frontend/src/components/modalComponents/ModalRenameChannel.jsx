@@ -68,6 +68,7 @@ const ModalRenameChannel = ({
             <Form.Control
               type="text"
               name="name"
+              autoComplete="off"
               aria-label=""
               className={inputClasses}
               onChange={formik.handleChange}

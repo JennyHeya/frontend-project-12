@@ -29,7 +29,7 @@ const Signup = ({ props }) => {
                   <Form.Control
                     type="text"
                     name="username"
-                    autoComplete="username"
+                    autoComplete="off"
                     required=""
                     aria-describedby="userNameHelpBlock"
                     placeholder={t('forms.registrationName')}
@@ -55,7 +55,7 @@ const Signup = ({ props }) => {
                     name="password"
                     aria-describedby="passwordHelpBlock"
                     required=""
-                    autoComplete="new-password"
+                    autoComplete="off"
                     type="password"
                     placeholder={t('forms.password')}
                     onChange={formik.handleChange}
@@ -83,7 +83,7 @@ const Signup = ({ props }) => {
                     name="confirmPassword"
                     aria-describedby="passwordHelpBlock"
                     required=""
-                    autoComplete="new-password"
+                    autoComplete="off"
                     placeholder={t('forms.confirmPassword')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

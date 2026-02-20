@@ -68,6 +68,7 @@ const ModalAddChannel = ({ show, handleClose }) => {
             <Form.Control
               type="text"
               name="name"
+              autoComplete="off"
               aria-label=""
               className={inputClasses}
               onChange={formik.handleChange}
