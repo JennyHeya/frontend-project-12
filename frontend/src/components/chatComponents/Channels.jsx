@@ -23,7 +23,7 @@ const Channels = ({ channels, handleModal, activeChannelId }) => {
         inputRef.setFocus()
       }}
     >
-      # 
+      #
       {name}
     </Button>
   )
